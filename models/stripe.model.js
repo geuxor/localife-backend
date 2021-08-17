@@ -52,7 +52,7 @@ function StripeDataModel(seq, types) {
     fields_needed: {
       type: types.ARRAY(types.STRING)
     },
-      timestamps: types.DATE
+    timestamps: types.DATE
   }, {
   });
   StripeData.associate = function (models) {
