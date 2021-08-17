@@ -26,16 +26,6 @@ router.get('/users', authMiddleware, userController.getUsers);
 router.get('/logout', userController.logoutUser);
 router.post('/profile', authMiddleware, userController.getUserProfile);
 
-//stripe routes
-const stripeController = require('./controllers/stripe.controller')
-router.post('/stripe/connect-account', authMiddleware, stripeController.createConnectAccount)
-router.post("/stripe/account-status", authMiddleware, stripeController.getAccountStatus);
-router.post("/stripe/account-balance", authMiddleware, stripeController.getAccountBalance);
-router.post("/stripe/payout-setting", authMiddleware, stripeController.getPayoutSetting);
-router.post('/stripe/test', authMiddleware, stripeController.testAccountBalance)
-router.post('/stripe/session', authMiddleware, stripeController.createSessionId)
-router.post('/stripe/success', authMiddleware, stripeController.stripeSuccess)
-
 //experiences routes
 const experienceController = require('./controllers/experience.controller')
 router.get("/experiences", experienceController.allExperiences);
