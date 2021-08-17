@@ -1,6 +1,7 @@
-console.log('model:                        🍭 entering experience.model');
+console.log('model:                        😅 entering experience.model');
 
-function ExperienceModel(seq, types) { 
+function ExperienceModel(seq, types) {
+
   const Experience = seq.define('Experience', {
     title: {
       type: types.STRING,
@@ -29,9 +30,21 @@ function ExperienceModel(seq, types) {
     quantity: {
       type: types.INTEGER
     },
-    timestamps: types.DATE
-  },);
+    lon: {
+      type: types.FLOAT
+    },
+    lat: {
+      type: types.FLOAT
+    }
+   },
+    {
+
+    });
+  Experience.associate = function (models) {
+    Experience.belongsTo(models.User);
+  };
   return Experience
 };
+
 
 module.exports = ExperienceModel

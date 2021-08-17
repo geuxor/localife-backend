@@ -1,9 +1,15 @@
 const db = require('../models/index')
 
 const allExperiences = async (req, res) => {
-  console.log("allExperiences");
+  console.log("allExperiences - null req");
   try {
-    const experiences = await db.Experience.findAll();
+    const experiences = await db.Experience.findAll(
+      {
+        include: {
+          model: db.User,
+          attributes: ['firstname']
+        } //include: [db.User]
+      });
     console.log('allExperiences: I found a total of ', experiences.length);
 
     res.status(201).json(experiences);
@@ -15,28 +21,39 @@ const allExperiences = async (req, res) => {
   }
 }
 
-const searchResults = async (req, res) => {
-  console.log("searchResults:", req.body);
+const mineExperiences = async (req, res) => {
+  console.log("allExperiences: MINE Experiences req => ", req.body);
+  const user = req.user
   try {
-    const experiences = await db.Experience.findAll({
-      where: req.body,
-      // returning: true,
-      // plain: true
-    });
-    console.log('SearchResults: I found a total of ', experiences.length);
+    const experiences = await db.Experience.findAll({ where: { user_id: user.id } });
     res.status(201).json(experiences);
   } catch (err) {
-    console.log("searchResults: err => ", err);
+    console.log("allExperiences: MINE experiences err => ", err);
     res.status(400).json({
       err: err.message,
     });
   }
 }
 
-const addExperience = async (req, res) => {
-  console.log("allExperiences: addExperience: ", req.body);
+//not being used
+const addOnlyExperience = async (req, res) => {
+  console.log("allExperiences: addExperience req: ", req.body);
   try {
     const experience = await db.Experience.create(req.body);
+    res.status(201).json(experience);
+  } catch (err) {
+    console.log("allExperiences: addOnlyExperience err => ", err);
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+};
+
+const addExperience = async (req, res) => {
+
+  try {
+    const experience = await db.Experience.create(req.body);
+
     console.log('allExperiences: addExperience:', " updated with ", experience.dataValues)
     res.status(201).json(experience);
   } catch (err) {
@@ -47,4 +64,22 @@ const addExperience = async (req, res) => {
   }
 };
 
-module.exports = { addExperience, allExperiences, searchResults }
+const addManyExperiences = async (req, res) => {
+  console.log(req.body.length);
+  
+  try {
+      for (let i = 0; i < req.body.length; i++) {
+        const experience = await db.Experience.create(req.body[i]);
+        console.log('allExperiences: addExperience:', " updated with ", experience.dataValues)
+      }
+      res.status(201).json('you got it!');
+    } catch (err) {
+      console.log("allExperiences: err => ", err);
+      res.status(400).json({
+        err: err.message,
+      });
+    }
+  }
+
+
+module.exports = { addExperience, addOnlyExperience, allExperiences, mineExperiences, addManyExperiences }

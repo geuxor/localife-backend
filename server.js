@@ -2,12 +2,15 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const router = require('./routers')
+const redis = require('redis')
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient()
 const cors = require('cors');
 const SERVER_PORT = process.env.SERVER_PORT || 4001;
 const { sequelize } = require('./models/index')
-const faker = require('faker');
-
+const fakeXps = require('./seeds/fakeXps')
 require('dotenv').config()
+console.log(process.env.MAX_AGE);
 
 const corsConfig = {
   origin: process.env.CLIENT_ORIGIN,
@@ -19,50 +22,31 @@ app.use(express.json());
 
 app.use(
   session({
-    name: 'sid%life',
+    store: new RedisStore({ client: redisClient }),
+    name: 'sid%localife',
     saveUninitialized: false,
     resave: false,
     secret: process.env.SECRET || '*&^%$£$%TYUJIKL?<HDTYUKO<MKNBFE£$R%T^Y&UJNBFW',
     cookie: {
-      maxAge: 2000 * 60 * 60, // 1hr
+      maxAge: 4000000,
       sameSite: true,
       httpOnly: false,
       // set secure and httponly =true in prod
       secure: false,
     },
   })
-  );  
-  
-  app.use(router);
+);
+redisClient.on('server: error', console.error)
 
-  app.get("/xps", (req, res) => {
-    res.json(getXps());
-  });
-  
-  function getXps() {
-    let experiences = [];
+app.use(router);
 
-    for (let i = 0; i < 12; i++) {
-      const randomTitle = faker.commerce.productAdjective()
-      const randomWords = faker.lorem.words()
-      var randomCity = faker.address.cityName();
-      var randomImage = faker.image.imageUrl();
-      const randomDescription = faker.commerce.productDescription()
-      const randomPrice = faker.commerce.price()
-      experiences.push({
-        title: randomTitle + ' ' + randomWords,
-        description: randomDescription,
-        location: randomCity,
-        price: randomPrice,
-        image: randomImage
-      })
-    }
-    return experiences;
-  }
+app.get("/xps/:amount", (req, res) => {
+  res.json(fakeXps(req.params));
+});
 
 app.get('*', (req, res) => {
   res.status(404).send('server ERR:                   🌵 No Route found');
-});  
+});
 
 (async () => {
   try {
@@ -73,11 +57,9 @@ app.get('*', (req, res) => {
         console.log(`server ERR:          👽 Bad errors occuring! ${err}`); // eslint-disable-line no-console
       } else {
         console.log(`===========================   🛰️ Server listening on port ${process.env.SERVER_PORT}! =======================>>`); // eslint-disable-line no-console
-      }  
-    })  
+      }
+    })
   } catch (err) {
     console.log(err)
-  }  
-})();  
-
-
+  }
+})();
