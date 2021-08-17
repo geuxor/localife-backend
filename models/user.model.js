@@ -40,20 +40,9 @@ function UserModel(seq, types) {
       type: types.BOOLEAN
     }
   }, {
-    // {
-    //   validate: {
-    //     emailcheck: function () {
-    //       if ((this.email === null)) {
-    //         throw new Error('Required')
-    //       }
-    //     }
-    //   }
   });
 
   User.associate = function (models) {
-    User.belongsTo(models.StripeData, {
-      foreignKey: 'stripe_account_id'
-    })
     User.hasMany(models.Experience);
   };
   return User
