@@ -22,22 +22,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dotenv = __importStar(require("dotenv"));
-var express_1 = __importDefault(require("express"));
-var cors_1 = __importDefault(require("cors"));
-var helmet_1 = __importDefault(require("helmet"));
+const dotenv = __importStar(require("dotenv"));
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
 dotenv.config();
 // require('dotenv').config()
-var app = express_1.default();
+const app = express_1.default();
 // DNS Prefetch Control, Frameguard, Hide Powered-By, HSTS, IE No Open, Don't Sniff Mimetype, and XSS Filter.
 app.use(helmet_1.default());
 app.use(cors_1.default());
 app.use(express_1.default.json());
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.send('Welcome!');
 });
 // Server setup
-app.listen(process.env.SERVER_PORT, function () {
+app.listen(process.env.SERVER_PORT, () => {
     console.log('⚡️ Server listening http://localhost:' + process.env.SERVER_PORT + ' ==================================>>');
 });
 // const PORT: number = parseInt(process.env.SERVER_PORT as string, 10);

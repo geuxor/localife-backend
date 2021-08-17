@@ -1,4 +1,5 @@
-const { Optional } = require('sequelize');
+const { Model, Optional } = require('sequelize');
+import { ExperienceAttributes } from './experience.model';
 
 console.log('model:                       🙋 entering experience.model');
 
@@ -19,31 +20,32 @@ export interface ExperienceAttributes {
   // [propName: string]: any
 }
 
-interface ExperienceCreationAttributes extends Optional<ExperienceAttributes, "id"> { }
+// interface ExperienceCreationAttributes extends Optional<ExperienceAttributes, "id"> { }
 
-class Experience extends ExperienceModel<ExperienceAttributes, ExperienceCreationAttributes>
-  implements ExperienceAttributes {
-  public id!: number; // Note that the `null assertion` `!` is required in strict mode.
-  public title!: string;
-  public description!: string; // for nullable fields
-  public location!: string;
-  public price!: number;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+// class Experience extends Model<ExperienceAttributes, ExperienceCreationAttributes>
+//   implements ExperienceAttributes {
+//   public id!: number; // Note that the `null assertion` `!` is required in strict mode.
+//   public title!: string;
+//   public description!: string; // for nullable fields
+//   public location!: string;
+//   public price!: number;
+//   public readonly createdAt!: Date;
+//   public readonly updatedAt!: Date;
 
   // Since TS cannot determine model association at compile time
   // we have to declare them here purely virtually
   // these will not exist until `Model.init` was called.
-  public getProjects!: HasManyGetAssociationsMixin<Project>; // Note the null assertions!
-  public addProject!: HasManyAddAssociationMixin<Project, number>;
-  public hasProject!: HasManyHasAssociationMixin<Project, number>;
-  public countProjects!: HasManyCountAssociationsMixin;
-  public createProject!: HasManyCreateAssociationMixin<Project>;
+  // public getProjects!: HasManyGetAssociationsMixin<Project>; // Note the null assertions!
+  // public addProject!: HasManyAddAssociationMixin<Project, number>;
+  // public hasProject!: HasManyHasAssociationMixin<Project, number>;
+  // public countProjects!: HasManyCountAssociationsMixin;
+  // public createProject!: HasManyCreateAssociationMixin<Project>;
 
 
-function ExperienceModel(seq: any, types: any) {
-
-  const Experience = seq.define<ExperienceModel>('Experience', {
+  const ExperienceModel = (seq: any, types: any): any => {
+    const Experience extends Model<ExperienceAttributes>
+    implements ExperienceAttributes { 
+    //  = seq.define<ExperienceAttributes>('Experience', {
     title: {
       type: types.STRING,
       allowNull: false,

@@ -21,7 +21,7 @@ const sequelize = new Sequelize(process.env.DBPG_DATABASE, process.env.DBPG_USER
 const files = fs.readdirSync(__dirname);
 
 for (let file of files) {
-  if (file !== 'index.js') {
+  if (file !== 'index.ts') {
     const modelCreation = require(path.join(__dirname, file))
     const model = modelCreation(sequelize, DataTypes)
     db[model.name] = model;
