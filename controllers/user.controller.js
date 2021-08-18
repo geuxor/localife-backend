@@ -2,7 +2,7 @@
 const db = require('../models/index')
 
 function logme() {
-  console.log('controller:                   🎮 entering user.controller *************');
+  console.log('controller:                   🎮 entering user.controller ************');
 }
 
 
