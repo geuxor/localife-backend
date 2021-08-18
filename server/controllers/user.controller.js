@@ -48,7 +48,7 @@ const addUser = async (req, res) => {
     const user = await db.User.create(req.body);
     console.log('addUser: newUser Created:', user.toJSON())
     req.session.uid = user.id;
-    res.status(201).send(user);
+    res.status(201).send('ok');
   } catch (error) {
     console.log(error);
     res.status(400).send({ error, message: 'addUser: 🐛 Could not create user' });
@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
       res.status(403).send('🐛 User not Found!');
     }
     console.log('loginUser: ok!!', user.email);
-    res.status(200).send({ email: user.email, firstname: user.firstname, lastname: user.lastname, createdAt: user.createdAt});
+    res.status(200).send({ email: user.email, firstname: user.firstname, lastname: user.lastname, avatar: user.avatar, createdAt: user.createdAt});
   } catch (error) {
     console.log(error);
     res
@@ -81,7 +81,6 @@ const loginUser = async (req, res) => {
       .send({ error: '401', message: '🐛 Username or password is incorrect' });
   }
 };
-
 
 const logoutUser = (req, res) => {
   console.log('logoutUser');

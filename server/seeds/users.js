@@ -4,9 +4,16 @@ const db = require('../models/index')
 const addFakeUser = async (req, res) => {
   console.log('creating fake users into DB', req.params);
   const amount = req.params.amount
-  users = []
+  let users = []
+  let alphabet = "abcdefghijklmnopqrstuvwxyz"
   for (let i = 0; i < amount; i++) {
-    const randomEmail = faker.internet.email();
+
+    let randomletter = Math.floor(Math.random() * alphabet.length)
+    const randomCharacter = alphabet[randomletter ]
+    alphabet = alphabet.replace(randomCharacter, '')
+    console.log('alphabet:', alphabet);
+    
+    const randomEmail = `${randomCharacter}@${randomCharacter}.com`
     const randomFirstname = faker.name.firstName()
     const randomLastname = faker.name.lastName()
     const randomPassword = '1234'
@@ -31,12 +38,12 @@ const addFakeUser = async (req, res) => {
       users.push(user)
       // res.status(201).send(users);
     } catch (err) {
-      console.log("allUsers: err => ", err);
+      console.log('allUsers: err => ', err);
       res.status(400).json({
         err: err.message,
       });
     }
-  };
+  }
   res.status(201).send(users);
 }
 
