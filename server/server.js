@@ -6,7 +6,6 @@ const redis = require('redis')
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient()
 const cors = require('cors');
-const SERVER_PORT = process.env.SERVER_PORT || 4001;
 const { sequelize } = require('./models/index')
 const fakeXps = require('./seeds/fakeXps')
 require('dotenv').config()
@@ -40,7 +39,7 @@ redisClient.on('server: error', console.error)
 
 app.use(router);
 
-app.get("/xps/:amount", (req, res) => {
+app.get('/xps/:amount', (req, res) => {
   res.json(fakeXps(req.params));
 });
 
@@ -54,7 +53,7 @@ app.get('*', (req, res) => {
     console.log('server:                       💽 database synced')
     app.listen(process.env.SERVER_PORT, (err) => {
       if (err) {
-        console.log(`server ERR:          👽 Bad errors occuring! ${err}`); // eslint-disable-line no-console
+        console.log(`server ERR:          👽 Bad errors occuring! ${err}`);
       } else {
         console.log(`===========================   🛰️ Server listening on port ${process.env.SERVER_PORT}! =======================>>`); // eslint-disable-line no-console
       }
