@@ -28,7 +28,7 @@ const getUserProfile = async (req, res) => {
     const user = req.user
     const {email, firstname, lastname, createdAt} = user
     res.status(200).send({ email, firstname, lastname, createdAt });
-  } catch {
+  } catch(error) {
     res.status(404).send({ error, message: '🐛 User not found' });
   }
 
