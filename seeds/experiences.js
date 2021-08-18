@@ -98,4 +98,13 @@ const addFakeExperience = async (req, res) => {
   res.status(201).send(experiences);
 }
 
-module.exports = { addFakeExperience }
+const destroyAll = async (req, res) => {
+  db.Experience.destroy({
+    where: {},
+    truncate: true
+  })
+  console.log('Experience Table is now empty');
+  res.json('all gone')
+}
+
+  module.exports = { addFakeExperience, destroyAll }
