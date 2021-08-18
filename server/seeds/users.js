@@ -1,18 +1,17 @@
+const { validateNewUser } = require('../utils/validate.user')
 var faker = require('faker');
 const db = require('../models/index')
 
 const addFakeUser = async (req, res) => {
-  console.log('creating fake users into DB', req.params);
   const amount = req.params.amount
   let users = []
   let alphabet = "abcdefghijklmnopqrstuvwxyz"
   for (let i = 0; i < amount; i++) {
-
+    console.log('creating fake users #', i,' into DB ====================>' );
     let randomletter = Math.floor(Math.random() * alphabet.length)
-    const randomCharacter = alphabet[randomletter ]
+    const randomCharacter = alphabet[randomletter]
     alphabet = alphabet.replace(randomCharacter, '')
-    console.log('alphabet:', alphabet);
-    
+
     const randomEmail = `${randomCharacter}@${randomCharacter}.com`
     const randomFirstname = faker.name.firstName()
     const randomLastname = faker.name.lastName()
@@ -21,22 +20,15 @@ const addFakeUser = async (req, res) => {
     const randomCountry = faker.address.country()
     const randomAvatar = faker.internet.avatar()
 
+    const validatedUserRes = await validateNewUser({ email: randomEmail, password: randomPassword, firstname: randomFirstname, lastname: randomLastname })
+    validatedUserRes.phone_number = randomPhone
+    validatedUserRes.country = randomCountry
+    validatedUserRes.avatar = randomAvatar
+    if (!validatedUserRes.email) console.log('Validation ERR response:', validatedUserRes);
     try {
-      const user = await db.User.create(
-        {
-          email: randomEmail,
-          password: randomPassword,
-          firstname: randomFirstname,
-          lastname: randomLastname,
-          phone_number: randomPhone,
-          country: randomCountry,
-          avatar: randomAvatar,
-        }
-      );
-
-      console.log('FakeUser created:                     ', user.dataValues)
+      const user = await db.User.create(validatedUserRes);
+      console.log('            🦞 FakeUser created for: ', user.firstname, user.lastname, 'id:', user.id, 'email:', user.email, 'password:', randomPassword)
       users.push(user)
-      // res.status(201).send(users);
     } catch (err) {
       console.log('allUsers: err => ', err);
       res.status(400).json({
