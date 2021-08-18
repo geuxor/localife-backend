@@ -26,6 +26,7 @@ router.post('/profile', userController.getUserProfile);
 
 //experiences routes
 const experienceController = require('./controllers/experience.controller')
+router.post("/search-results", experienceController.searchResults);
 router.get("/experiences", experienceController.allExperiences);
 router.post("/experiences/mine", experienceController.mineExperiences);
 router.post("/experiences/new", experienceController.addExperience);
