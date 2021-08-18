@@ -98,7 +98,7 @@ const addFakeExperience = async (req, res) => {
   res.status(201).send(experiences);
 }
 
-const destroyAll = async (req, res) => {
+const destroyAllExperiences = async (req, res) => {
   db.Experience.destroy({
     where: {},
     truncate: true
@@ -107,4 +107,13 @@ const destroyAll = async (req, res) => {
   res.json('all gone')
 }
 
-  module.exports = { addFakeExperience, destroyAll }
+const destroyAllUsers = async (req, res) => {
+  db.User.destroy({
+    where: {},
+    truncate: true
+  })
+  console.log('User Table is now empty');
+  res.json('all gone')
+}
+
+module.exports = { addFakeExperience, destroyAllExperiences, destroyAllUsers }
