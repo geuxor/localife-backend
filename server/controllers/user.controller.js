@@ -57,6 +57,8 @@ const addUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   logme()
+  console.log(req.session);
+  
   console.log('loginUser', req.body);
   try {
     const { email, password } = req.body;
@@ -72,6 +74,10 @@ const loginUser = async (req, res) => {
       console.log(user, 'not found in DB!!!');
       res.status(403).send('🐛 User not Found!');
     }
+    //validation
+    req.session.isAuth = user.id
+    console.log(req.session);
+    
     console.log('loginUser: ok!!', user.email);
     res.status(200).send({ email: user.email, firstname: user.firstname, lastname: user.lastname, avatar: user.avatar, createdAt: user.createdAt});
   } catch (error) {

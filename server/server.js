@@ -1,15 +1,14 @@
 const express = require('express');
 const app = express();
-const session = require('express-session');
-const router = require('./routers')
 const redis = require('redis')
+const session = require('express-session');
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient()
+const router = require('./routers')
 const cors = require('cors');
 const { sequelize } = require('./models/index')
 const fakeXps = require('./seeds/fakeXps')
 require('dotenv').config()
-console.log(process.env.MAX_AGE);
 
 const corsConfig = {
   origin: process.env.CLIENT_ORIGIN,
@@ -18,6 +17,7 @@ const corsConfig = {
 
 app.use(cors(corsConfig));
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true }))
 
 app.use(
   session({
