@@ -44,8 +44,8 @@ const getCoordinates = (loc) => {
 const addFakeExperience = async (req, res) => {
   console.log('creating fake experiences into DB', req.params);
   const amount = req.params.amount
-  const cities = ["Barcelona", "London", "Copenhagen", "Paris", "Twatt"]
-  experiences = []
+  const cities = ['Barcelona', 'London', 'Copenhagen', 'Paris', 'Twatt']
+  let experiences = []
   for (let i = 0; i < amount; i++) {
     console.log('entering 4loop');
 
@@ -89,12 +89,12 @@ const addFakeExperience = async (req, res) => {
       experiences.push(experience)
       // res.status(201).send(experiences);
     } catch (err) {
-      console.log("allExperiences: err => ", err);
+      console.log('allExperiences: err => ', err);
       res.status(400).json({
         err: err.message,
       });
     }
-  };
+  }
   res.status(201).send(experiences);
 }
 
