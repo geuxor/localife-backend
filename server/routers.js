@@ -1,15 +1,22 @@
 const router = require('express').Router();
 const authMiddleware = require('./middleware/auth.mw');
 
-console.log(`\n..............................💫 ROUTES
+console.log(`\n💫 ROUTES..............................
 post            /register
-post            /login
-get             /logout
-get             /experiences
-post            /experiences/new
-get             /fake/experiences ==> creates and stores new fake data in DB
+post            /login => cookie is created
+get             /logout => cookie is destroyed
+get             /experiences => get all experiences
+post            /experiences/new => create a new experience
+
+get             /destroy-experiences ==> empties the Experience table in DB
+get             /destroy-users ==> empties the User table in DB
+
+get             /fake/experiences/"amount" ==> creates and stores new fake data in DB with specific amount
+get             /fake/user/"amount" ==> creates and stores new fake data in DB with specific amount
+
 get             /xps  ==> returns fake data without hitting the DB
 get             /search-result?location=Barcelona
+
 ..............................\n`);
 //faker
 const seedsExperiences = require('./seeds/experiences')
