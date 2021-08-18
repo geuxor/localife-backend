@@ -1,5 +1,23 @@
 const db = require('../models/index')
 
+const searchResults = async (req, res) => {
+  console.log("searchResults:", req.body);
+  try {
+    const experiences = await db.Experience.findAll({
+      where: req.body,
+      // returning: true,
+      // plain: true
+    });
+    console.log('SearchResults: I found a total of ', experiences.length);
+    res.status(201).json(experiences);
+  } catch (err) {
+    console.log("searchResults: err => ", err);
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+}
+
 const allExperiences = async (req, res) => {
   console.log("allExperiences - null req");
   try {
@@ -82,4 +100,4 @@ const addManyExperiences = async (req, res) => {
   }
 
 
-module.exports = { addExperience, addOnlyExperience, allExperiences, mineExperiences, addManyExperiences }
+module.exports = { addExperience, addOnlyExperience, allExperiences, mineExperiences, addManyExperiences, searchResults }
