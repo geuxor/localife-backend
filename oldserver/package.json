@@ -1,0 +1,43 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Colonyal Marketplace",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:seed": "node scripts/seeds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geuxor/colonyal1.git"
+  },
+  "author": "gb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geuxor/colonyal1/issues"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-redis": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^6.0.0",
+    "express-session": "^1.17.2",
+    "moment": "^2.29.1",
+    "mongodb": "^4.0.1",
+    "mongoose": "^5.13.3",
+    "morgan": "^1.10.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "query-string": "^7.0.1",
+    "redis": "^3.1.2",
+    "sequelize": "^6.6.5",
+    "stripe": "^8.165.0"
+  },
+  "devDependencies": {
+    "faker": "^5.5.3"
+  }
+}
