@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const authMiddleware = require('./middlewares/auth.mw');
+const authMiddleware = require('./middleware/auth.mw');
 
 console.log(`\n..............................💫 ROUTES
 post            /register
@@ -23,7 +23,7 @@ router.get('/destroy-users', seedsExperiences.destroyAllUsers)
 const userController = require('./controllers/user.controller')
 router.post('/register', userController.addUser);
 router.post('/login', userController.loginUser);
-router.get('/users', userController.getUsers);
+router.get('/users', authMiddleware, userController.getUsers);
 router.get('/logout', userController.logoutUser);
 router.post('/profile', userController.getUserProfile);
 
