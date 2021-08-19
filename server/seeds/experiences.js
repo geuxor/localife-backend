@@ -5,32 +5,32 @@ const getCoordinates = (loc) => {
   let Lon;
   let Lat;
   if (loc == 'Barcelona') {
-    Lon = `41.4${faker.datatype.number(80000)}`
-    Lat = `2.${faker.datatype.number(200000)}`
+    Lat = `41.4${faker.datatype.number(80000)}`
+    Lon = `2.${faker.datatype.number(200000)}`
   } else if (loc == 'Copenhagen') {
-    Lon = `55.${faker.datatype.number({
+    Lat = `55.${faker.datatype.number({
       'min': 600000,
       'max': 800000
     })}`
-    Lat = `12.${faker.datatype.number({
+    Lon = `12.${faker.datatype.number({
       'min': 500000,
       'max': 700000
     })}`
   } else if (loc == 'Paris') {
-    Lon = `49.${faker.datatype.number({
+    Lat = `49.${faker.datatype.number({
       'min': 800000,
       'max': 950000
     })}`
-    Lat = `2.${faker.datatype.number({
+    Lon = `2.${faker.datatype.number({
       'min': 100000,
       'max': 500000
     })}`
   } else if (loc == 'London') {
-    Lon = `51.${faker.datatype.number({
+    Lat = `51.${faker.datatype.number({
       'min': 300000,
       'max': 700000
     })}`
-    Lat = `0.${faker.datatype.number({
+    Lon = `0.${faker.datatype.number({
       'min': 000000,
       'max': 600000
     })}`
@@ -107,13 +107,6 @@ const destroyAllExperiences = async (req, res) => {
   res.json('all gone')
 }
 
-const destroyAllUsers = async (req, res) => {
-  db.User.destroy({
-    where: {},
-    truncate: true
-  })
-  console.log('User Table is now empty');
-  res.json('all gone')
-}
 
-module.exports = { addFakeExperience, destroyAllExperiences, destroyAllUsers }
+
+module.exports = { addFakeExperience, destroyAllExperiences }
