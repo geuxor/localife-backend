@@ -24,7 +24,7 @@ router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience);
 const seedsUsers = require('./seeds/users')
 router.get('/fake/users/:amount', seedsUsers.addFakeUser);
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)
-router.get('/destroy-users', seedsExperiences.destroyAllUsers)
+router.get('/destroy-users', seedsUsers.destroyAllUsers)
 
 //auth routes
 const userController = require('./controllers/user.controller')
