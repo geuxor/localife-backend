@@ -39,4 +39,13 @@ const addFakeUser = async (req, res) => {
   res.status(201).send(users);
 }
 
-module.exports = { addFakeUser }
+const destroyAllUsers = async (req, res) => {
+  db.User.destroy({
+    where: {},
+    truncate: true
+  })
+  console.log('User Table is now empty');
+  res.json('all gone')
+}
+
+module.exports = { addFakeUser, destroyAllUsers }
