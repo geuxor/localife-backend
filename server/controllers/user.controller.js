@@ -13,7 +13,6 @@ const getUsers = async (req, res) => {
   try {
     const users = await db.User.findAll();
     console.log('   #', users.length, 'users found');
-    // console.log("All users:", JSON.stringify(users, null, 2));
     users.forEach(m => console.log(m.email))
     res.status(200).send(users);
   } catch (err) {
@@ -93,7 +92,7 @@ const loginUser = async (req, res) => {
 const logoutUser = (req, res) => {
   console.log('logoutUser');
   setTimeout(() => {
-    console.log('waiting...')
+    console.log('destroying...')
 
     req.session.destroy((error) => {
       if (error) {
@@ -101,10 +100,10 @@ const logoutUser = (req, res) => {
           .status(500)
           .send({ error, message: '🐛 Could not log out, please try again' });
       } else {
-        res.clearCookie('sid');
-        console.log('sid destroyed!!');
-        res.sendStatus(200) //.send('CLEARED');
+        res.sendStatus(200)
       }
+      res.clearCookie('sid');
+      console.log('sid destroyed!!');
     });
   }, 1000);
 };
