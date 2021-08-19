@@ -35,7 +35,6 @@ const validateNewUser = async (userData) => {
 const encryptPw = async (pw) => {
   try {
     const hash = await bcrypt.hash(pw, 10)
-    // console.log('validation: 🚷 bcrypt.hash=', hash)
     return hash
   } catch (err) {
     console.log(err)

@@ -4,7 +4,7 @@ const authMiddleware = async (req, res, next) => {
   console.log('authMW:.......................🚽 entering authMiddelWare')
   
   if (!req.session) {
-    return next(new Error('Redis was Unable to create Session'))
+    return next(new Error('Redis was Unable to store Session'))
   }
   console.log('with session:', req.sessionID, 'and body', req.body);
   if (req.session.isAuth) {
