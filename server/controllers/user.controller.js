@@ -23,13 +23,16 @@ const getUsers = async (req, res) => {
 
 const getUserProfile = async (req, res) => {
   logme()
-  console.log('getuserProfile');
+  console.log('getuserProfile:');
   try {
     const user = req.user
-    const { email, firstname, lastname, createdAt } = user
-    res.status(200).send({ email, firstname, lastname, createdAt });
-  } catch (error) {
-    res.status(404).send({ error, message: '🐛 User not found' });
+    const { email, firstname, lastname, avatar, createdAt } = user
+    if (!user) throw new Error('mw says invalid user')
+    console.log('ReLogged in successfully as user.id:', req.session.isAuth);
+    res.status(200).send({ email, firstname, lastname, avatar, createdAt });
+  } catch (err) {
+    console.log('getuserProfile:', err);
+    res.status(404).send({ message: err.message })
   }
 
 };
