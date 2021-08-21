@@ -73,39 +73,40 @@ const loginUser = async (req, res) => {
       plain: true,
     });
     if (!user) {
-      console.log(user, 'not found in DB!!!');
+      console.log(user, ': user not found in DB!!!');
       res.status(403).send('🐛 User not Found!');
+    } else {
+      const validatedPass = await validateOldUser(user, email, password)
+      if (!validatedPass) throw new Error('🐛 username or password is incorrect');
+      req.session.isAuth = user.id
+      console.log('Logged in successfully as user.id:', req.session.isAuth, user.email);
+      res.status(200).send({ email: user.email, firstname: user.firstname, lastname: user.lastname, avatar: user.avatar, createdAt: user.createdAt });
     }
-    const validatedPass = await validateOldUser(user, email, password)
-    if (!validatedPass) throw new Error('🐛 username or password is incorrect');
-    req.session.isAuth = user.id
-    console.log('Logged in successfully as user.id:', req.session.isAuth, user.email);
-    res.status(200).send({ email: user.email, firstname: user.firstname, lastname: user.lastname, avatar: user.avatar, createdAt: user.createdAt });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     res
       .status(401)
-      .send({ error: '401', message: '🐛 Username or password is incorrect' });
+      .send({ error: '401', message: err});
   }
 };
 
 const logoutUser = (req, res) => {
   console.log('logoutUser');
-  setTimeout(() => {
-    console.log('destroying...')
-
+  console.log('destroying...')
+  try {
     req.session.destroy((error) => {
       if (error) {
         res
           .status(500)
           .send({ error, message: '🐛 Could not log out, please try again' });
-      } else {
-        res.sendStatus(200)
       }
-      res.clearCookie('sid');
+      res.clearCookie('sid').send({cookie: 'destroyed'});
       console.log('sid destroyed!!');
     });
-  }, 1000);
+  } catch (err) {
+    console.log(err);
+
+  }
 };
 
 module.exports = { getUsers, addUser, loginUser, logoutUser, getUserProfile };

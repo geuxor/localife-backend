@@ -1,4 +1,4 @@
-console.log('model:                       🙋‍♂️ entering StripeData.model');
+console.log('model:                       🙋 entering StripeData.model');
 
 function StripeDataModel(seq, types) {
   const StripeData = seq.define('StripeData', {
