@@ -132,10 +132,18 @@ const updateStripe = async (req, res) => {
         avatar: 'https://cdn.fakercloud.com/avatars/uxpiper_128.jpg',
         stripe_session_id: null,
         stripe_registration_complete: true,
-        stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
+        // stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
       })
       console.log('dbCreate', dbCreate.id);
       
+      //updating Stripe Table
+      const stripeUpdateResult = await db.StripeData.create(
+        {
+          stripe_account_id: 'acct_1JQtneRf7VatYAmJ',
+          stripe_user_id: dbCreate.id
+        })
+      await stripeUpdateResult.setUser(dbCreate.id)
+        
       userid = dbCreate.id
     } else {
       console.log('user already exists');
