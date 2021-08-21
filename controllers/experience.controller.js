@@ -30,11 +30,10 @@ const getOneExperiences = async (req, res)=> {
       err: err.message,
     });
   }
-
-  
 }
+
 const allExperiences = async (req, res) => {
-  console.log('allExperiences - null req');
+  console.log('allExperiences', req.body, req.query, req.params);
   try {
     const experiences = await db.Experience.findAll(
       {

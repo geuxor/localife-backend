@@ -14,6 +14,12 @@ function ExperienceModel(seq, types) {
     location: {
       type: types.STRING,
     },
+    city: {
+      type: types.STRING,
+    },
+    country: {
+      type: types.STRING,
+    },
     price: {
       type: types.INTEGER,
       allowNull: false
@@ -44,7 +50,7 @@ function ExperienceModel(seq, types) {
     Experience.belongsTo(models.User);
   };
   return Experience
-};
+}
 
 
 module.exports = ExperienceModel
