@@ -37,9 +37,20 @@ router.post('/profile', userController.getUserProfile);
 //experiences routes
 const experienceController = require('./controllers/experience.controller')
 router.post('/search-results', experienceController.searchResults);
+router.get('/experience/:id', experienceController.getOneExperiences);
 router.get('/experiences', experienceController.allExperiences);
 router.post('/experiences/mine', experienceController.mineExperiences);
 router.post('/experiences/new', experienceController.addExperience);
 router.post('/experiences/addmany', experienceController.addManyExperiences);
+
+//stripe routes
+const stripeController = require('./controllers/stripe.controller')
+router.post('/stripe/connect-account', authMiddleware, stripeController.createConnectAccount)
+router.post('/stripe/account-status', authMiddleware, stripeController.getAccountStatus);
+router.post('/stripe/account-balance', authMiddleware, stripeController.getAccountBalance);
+router.post('/stripe/payout-setting', authMiddleware, stripeController.getPayoutSetting);
+router.post('/stripe/test', authMiddleware, stripeController.testAccountBalance)
+router.post('/stripe/session', authMiddleware, stripeController.createSessionId)
+router.post('/stripe/success', authMiddleware, stripeController.stripeSuccess)
 
 module.exports = router;
