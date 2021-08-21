@@ -7,9 +7,6 @@ function UserModel(seq, types) {
       type: types.STRING,
       allowNull: false,
       unique: true,
-      isEmail: {
-        msg: "Must be an email"
-      },
     },
     password: {
       type: types.STRING,
@@ -43,6 +40,9 @@ function UserModel(seq, types) {
   });
 
   User.associate = function (models) {
+    User.belongsTo(models.StripeData, {
+      foreignKey: 'stripe_account_id'
+    })
     User.hasMany(models.Experience);
   };
   return User
