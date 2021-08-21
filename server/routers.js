@@ -22,6 +22,7 @@ get             /search-result?location=Barcelona
 const seedsExperiences = require('./seeds/experiences')
 router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience);
 const seedsUsers = require('./seeds/users')
+router.get('/update-stripe', seedsExperiences.updateStripe)
 router.get('/fake/users/:amount', seedsUsers.addFakeUser);
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)
 router.get('/destroy-users', seedsUsers.destroyAllUsers)
