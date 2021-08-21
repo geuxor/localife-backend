@@ -8,14 +8,15 @@ function getXps(params) {
   for (let i = 0; i < params.amount; i++) {
     const randomTitle = faker.commerce.productAdjective()
     const randomWords = faker.lorem.words()
-    var randomCity = faker.address.cityName();
     var randomImage = faker.image.imageUrl();
     const randomDescription = faker.commerce.productDescription()
     const randomPrice = faker.commerce.price()
     experiences.push({
       title: randomTitle + ' ' + randomWords,
       description: randomDescription,
-      location: randomCity,
+      location: 'Barcelona',
+      city: 'Barcelona',
+      country: 'Spain',
       price: randomPrice,
       image: randomImage
     })
