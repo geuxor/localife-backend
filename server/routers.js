@@ -33,7 +33,7 @@ router.post('/register', userController.addUser);
 router.post('/login', userController.loginUser);
 router.get('/users', authMiddleware, userController.getUsers);
 router.get('/logout', userController.logoutUser);
-router.post('/profile', userController.getUserProfile);
+router.post('/profile', authMiddleware, userController.getUserProfile);
 
 //experiences routes
 const experienceController = require('./controllers/experience.controller')

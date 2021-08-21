@@ -45,19 +45,22 @@ const addFakeExperience = async (req, res) => {
   console.log('creating fake experiences into DB', req.params);
   const amount = req.params.amount
   const cities = ['Barcelona', 'London', 'Copenhagen', 'Paris', 'Twatt']
+  const countries = ['Spain', 'UK', 'Denmark', 'France', 'Scotland']
   let experiences = []
   for (let i = 0; i < amount; i++) {
     console.log('entering 4loop');
 
-    var loc = cities[Math.floor(Math.random() * cities.length)];
+    var locCity = cities[Math.floor(Math.random() * cities.length)];
+    var locCountry = cities[Math.floor(Math.random() * countries.length)];
     const randomTitle = faker.commerce.productAdjective()
     const randomWords = faker.lorem.words()
-    const randomCity = loc //faker.address.cityName();
+    const randomCity = locCity //faker.address.cityName();
+    const randomCountry = locCountry //faker.address.cityName();
     const randomImage = faker.image.imageUrl();
     const randomDescription = faker.commerce.productDescription()
     const randomPrice = faker.commerce.price().slice(0, -3)
-    const randomLon = getCoordinates(loc)[0]
-    const randomLat = getCoordinates(loc)[1]
+    const randomLon = getCoordinates(locCity)[0]
+    const randomLat = getCoordinates(locCity)[1]
     const randomDateFrom = faker.date.past()
     const randomDateTo = faker.date.future();
     const randomNumber = faker.datatype.number(10);
@@ -74,6 +77,8 @@ const addFakeExperience = async (req, res) => {
           title: randomTitle + ' ' + randomWords,
           description: randomDescription,
           location: randomCity,
+          city: randomCity,
+          country: randomCountry,
           price: randomPrice,
           image: randomImage,
           lon: randomLon,
@@ -85,7 +90,7 @@ const addFakeExperience = async (req, res) => {
         }
       );
 
-      console.log('FakeExperience created in:                     ', loc, '\n', experience.dataValues)
+      console.log('FakeExperience created in:                     ', locCity, '\n', experience.dataValues)
       experiences.push(experience)
       // res.status(201).send(experiences);
     } catch (err) {
@@ -130,6 +135,7 @@ const updateStripe = async (req, res) => {
         stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
       })
       console.log('dbCreate', dbCreate.id);
+      
       userid = dbCreate.id
     } else {
       console.log('user already exists');
