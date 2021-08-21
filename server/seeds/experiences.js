@@ -142,8 +142,8 @@ const updateStripe = async (req, res) => {
         plain: true
       })
     console.log('experience updated :', updateXps);
-    console.log('ALL OK: login as: a@a.aaa password: 1234 and book an xp in Copenhagen');    
-    res.status(200).send('ALL OK: login as: >a@a.aaa< password: >1234< and book an xp in Copenhagen')
+    console.log('ALL OK: login as: any user and book an xp in Copenhagen - provider is a@a.aaa 1234');
+    res.status(200).send('ALL OK: login as any user and book an xp in Copenhagen - provider is a@a.aaa 1234')
   } catch (err) {
     console.log(err);
 
