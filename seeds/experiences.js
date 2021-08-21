@@ -107,6 +107,47 @@ const destroyAllExperiences = async (req, res) => {
   res.json('all gone')
 }
 
+const updateStripe = async (req, res) => {
+  let userid;
+  try {
+    const dbRes = await db.User.findOne({
+      where: {
+        email: 'a@a.aaa'
+      }
+    })
 
+    if (!dbRes) {
+      const dbCreate = await db.User.create({
+        email: 'a@a.aaa',
+        password: '$2b$10$IAnC8UWPv/4P1720X5JE8Ou/vVFuyNV6mYiLGTzC2C5iH9ti0L0aq',
+        firstname: 'Evans',
+        lastname: 'Schumm',
+        phone_number: '1-773-796-4543',
+        country: 'Yemen',
+        avatar: 'https://cdn.fakercloud.com/avatars/uxpiper_128.jpg',
+        stripe_session_id: null,
+        stripe_registration_complete: true,
+        stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
+      })
+      console.log('dbCreate', dbCreate.id);
+      userid = dbCreate.id
+    } else {
+      console.log('user already exists');
+      console.log('dbres:', dbRes.id);
+      userid = dbRes.id
+    }
+    const updateXps = await db.Experience.update({ UserId: userid },
+      {
+        where: { location: 'Copenhagen' },
+        plain: true
+      })
+    console.log('experience updated :', updateXps);
+    console.log('ALL OK: login as: a@a.aaa password: 1234 and book an xp in Copenhagen');    
+    res.status(200).send('ALL OK: login as: >a@a.aaa< password: >1234< and book an xp in Copenhagen')
+  } catch (err) {
+    console.log(err);
 
-module.exports = { addFakeExperience, destroyAllExperiences }
+  }
+}
+
+module.exports = { addFakeExperience, destroyAllExperiences, updateStripe }
