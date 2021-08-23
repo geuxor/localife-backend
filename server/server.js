@@ -52,7 +52,7 @@ app.get('*', (req, res) => {
     console.log('server:                       💽 database synced')
     app.listen(process.env.SERVER_PORT, (err) => {
       if (err) {
-        console.log(`server ERR:          👽 Bad errors occuring! ${err}`);
+        console.log(`server ERR:           👽 Bad errors occuring! ${err}`);
       } else {
         console.log(`===========================   🛰️ Server listening on port ${process.env.SERVER_PORT}! =======================>>`); // eslint-disable-line no-console
       }

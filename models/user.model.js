@@ -35,7 +35,10 @@ function UserModel(seq, types) {
     },
 
     stripe_registration_complete: {
-      type: types.STRING
+      type: types.STRING,
+      // type: types.ENUM,
+      // values: ['DENIED', 'PENDING', 'REJECTED', 'COMPLETED'],
+      defaultValue: 'DENIED'
     }
   }, {
   });
