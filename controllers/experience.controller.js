@@ -7,6 +7,10 @@ const searchResults = async (req, res) => {
       where: req.body,
       // returning: true,
       // plain: true
+      include: {
+        model: db.User,
+        attributes: ['firstname', 'avatar']
+      }
     });
     console.log('SearchResults: I found a total of ', experiences.length);
     res.status(201).json(experiences);
