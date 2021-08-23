@@ -16,7 +16,7 @@ const addBooking = async (req, res) => {
 
 const mineBookings = async (req, res) => {
   const user = req.user
-  console.log('mineBookings: => ', user.id);
+  console.log('mineBookings: => ', user);
   try {
     const bookings = await db.Booking.findAll({ where: { UserId: user.id },
       include: {
