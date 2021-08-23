@@ -5,18 +5,26 @@ console.log(`\n💫 ROUTES..............................
 post            /register
 post            /login => cookie is created
 get             /logout => cookie is destroyed
-get             /experiences => get all experiences
-post            /experiences/new => create a new experience
 
-get             /destroy-experiences ==> empties the Experience table in DB
-get             /destroy-users ==> empties the User table in DB
-
+EXPERIENCES.....
 get             /fake/experiences/"amount" ==> creates and stores new fake data in DB with specific amount
-get             /fake/user/"amount" ==> creates and stores new fake data in DB with specific amount
+post            /experiences/new => create a new experience
+get             /experiences => get all experiences
+get             /destroy-experiences ==> empties the Experience table in DB
+get             /destroy-experiences
+
+USERS..........
+get             /fake/users/"amount" ==> creates and stores new fake data in DB with specific amount
+get             /destroy-users ==> empties the User table in DB
 
 get             /xps  ==> returns fake data without hitting the DB
 get             /search-result?location=Barcelona
 
+BOOKINGS.......
+get             /fake/bookings/:amount'
+get             /destroy-bookings
+
+get             /update-stripe
 ..............................\n`);
 //faker
 const seedsExperiences = require('./seeds/experiences')
