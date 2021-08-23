@@ -10,7 +10,7 @@ get             /logout => cookie is destroyed
 post            /profile       ==> relogin user
 
 EXPERIENCES.....
-get             /fake/experiences/"amount" => creates and stores new fake data in DB with specific amount
+get             /fake/experiences/:amount => creates and stores new fake data in DB with specific amount
 post            /experiences/new      => create a new experience
 get             /experiences          => get all experiences
 get             /destroy-experiences  ==> empties the Experience table in DB
