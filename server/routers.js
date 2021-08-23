@@ -2,23 +2,24 @@ const router = require('express').Router();
 const authMiddleware = require('./middleware/auth.mw');
 
 console.log(`\n💫 ROUTES..............................
+get             /search-result?location=Barcelona
+
 post            /register
 post            /login => cookie is created
 get             /logout => cookie is destroyed
+post            /profile       ==> relogin user
 
 EXPERIENCES.....
-get             /fake/experiences/"amount" ==> creates and stores new fake data in DB with specific amount
-post            /experiences/new => create a new experience
-get             /experiences => get all experiences
-get             /destroy-experiences ==> empties the Experience table in DB
-get             /destroy-experiences
+get             /fake/experiences/"amount" => creates and stores new fake data in DB with specific amount
+post            /experiences/new      => create a new experience
+get             /experiences          => get all experiences
+get             /destroy-experiences  ==> empties the Experience table in DB
+get             /xps  ==> returns fake data without hitting the DB
 
 USERS..........
 get             /fake/users/"amount" ==> creates and stores new fake data in DB with specific amount
 get             /destroy-users ==> empties the User table in DB
-
-get             /xps  ==> returns fake data without hitting the DB
-get             /search-result?location=Barcelona
+get             /users         ==> get all users
 
 BOOKINGS.......
 get             /fake/bookings/:amount'
@@ -43,7 +44,7 @@ router.get('/destroy-bookings', seedsBookings.destroyAllBookings)
 const userController = require('./controllers/user.controller')
 router.post('/register', userController.addUser);
 router.post('/login', userController.loginUser);
-router.get('/users', authMiddleware, userController.getUsers);
+router.get('/users', userController.getUsers);
 router.get('/logout', userController.logoutUser);
 router.post('/profile', authMiddleware, userController.getUserProfile);
 
