@@ -49,9 +49,15 @@ const addFakeExperience = async (req, res) => {
   let experiences = []
   for (let i = 0; i < amount; i++) {
     console.log('entering 4loop');
+    let y
+    if (i < 6) {
+      y = i
+    } else {
+      y = 0
+    }
+    var locCity = cities[y];
+    var locCountry = countries[y] //Math.floor(Math.random() * countries.length)];
 
-    var locCity = cities[Math.floor(Math.random() * cities.length)];
-    var locCountry = cities[Math.floor(Math.random() * countries.length)];
     const randomTitle = faker.commerce.productAdjective()
     const randomWords = faker.lorem.words()
     const randomCity = locCity //faker.address.cityName();
@@ -68,27 +74,30 @@ const addFakeExperience = async (req, res) => {
       'min': 1,
       'max': 10
     });
+
     console.log(randomLon, randomLat);
 
-
+    let newxp = {
+      title: randomTitle + ' ' + randomWords,
+      description: randomDescription,
+      location: randomCity,
+      city: randomCity,
+      country: randomCountry,
+      price: randomPrice,
+      image: randomImage,
+      lon: randomLon,
+      lat: randomLat,
+      from: randomDateFrom,
+      to: randomDateTo,
+      quantity: randomNumber,
+      UserId: randomUser
+    }
+    console.log('-------------------------------------');
+    
+    console.log(newxp);
+    
     try {
-      const experience = await db.Experience.create(
-        {
-          title: randomTitle + ' ' + randomWords,
-          description: randomDescription,
-          location: randomCity,
-          city: randomCity,
-          country: randomCountry,
-          price: randomPrice,
-          image: randomImage,
-          lon: randomLon,
-          lat: randomLat,
-          from: randomDateFrom,
-          to: randomDateTo,
-          quantity: randomNumber,
-          UserId: randomUser
-        }
-      );
+      const experience = await db.Experience.create(newxp);
 
       console.log('FakeExperience created in:                     ', locCity, '\n', experience.dataValues)
       experiences.push(experience)
