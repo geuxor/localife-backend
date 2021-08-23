@@ -18,7 +18,11 @@ const mineBookings = async (req, res) => {
   const user = req.user
   console.log('mineBookings: => ', user.id);
   try {
-    const bookings = await db.Booking.findAll({ where: { UserId: user.id } });
+    const bookings = await db.Booking.findAll({ where: { UserId: user.id },
+      include: {
+        model: db.Experience,
+        attributes: ['title', 'description', 'price', 'image', 'city', 'country']
+      } });
     res.status(201).json(bookings);
   } catch (err) {
     console.log('mineBookings: err => ', err);
