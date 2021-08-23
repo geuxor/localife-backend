@@ -23,7 +23,7 @@ const authMiddleware = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    res.status(401).send('Maria is forbidden')
+    res.status(402).send('Maria is forbidden')
   }
 };
 
