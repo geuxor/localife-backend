@@ -34,7 +34,10 @@ function UserModel(seq, types) {
       type: types.STRING
     },
     stripe_registration_complete: {
-      type: types.BOOLEAN
+      type: types.STRING,
+      // type: types.ENUM,
+      // values: ['DENIED', 'PENDING', 'REJECTED', 'COMPLETED'],
+      defaultValue: 'DENIED'
     }
   }, {
   });
@@ -44,6 +47,7 @@ function UserModel(seq, types) {
       foreignKey: 'stripe_account_id'
     })
     User.hasMany(models.Experience);
+    User.hasMany(models.Booking);
   };
   return User
 }
