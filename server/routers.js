@@ -21,11 +21,15 @@ get             /search-result?location=Barcelona
 //faker
 const seedsExperiences = require('./seeds/experiences')
 router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience);
-const seedsUsers = require('./seeds/users')
-router.get('/update-stripe', seedsExperiences.updateStripe)
-router.get('/fake/users/:amount', seedsUsers.addFakeUser);
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)
+router.get('/update-stripe', seedsExperiences.updateStripe)
+const seedsUsers = require('./seeds/users')
+router.get('/fake/users/:amount', seedsUsers.addFakeUser);
 router.get('/destroy-users', seedsUsers.destroyAllUsers)
+const seedsBookings = require('./seeds/bookings')
+router.get('/fake/bookings/:amount', seedsBookings.addFakeBookings)
+router.get('/destroy-bookings', seedsBookings.destroyAllBookings)
+
 
 //auth routes
 const userController = require('./controllers/user.controller')
@@ -43,6 +47,11 @@ router.get('/experiences', experienceController.allExperiences);
 router.post('/experiences/mine', experienceController.mineExperiences);
 router.post('/experiences/new', experienceController.addExperience);
 router.post('/experiences/addmany', experienceController.addManyExperiences);
+
+//bookings routes
+const bookingController = require('./controllers/booking.controller')
+router.post('/bookings/mine', authMiddleware, bookingController.mineBookings);
+router.post('/bookings/new', authMiddleware, bookingController.addBooking);
 
 //stripe routes
 const stripeController = require('./controllers/stripe.controller')
