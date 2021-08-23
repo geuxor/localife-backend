@@ -38,7 +38,7 @@ function UserModel(seq, types) {
       type: types.STRING,
       // type: types.ENUM,
       // values: ['DENIED', 'PENDING', 'REJECTED', 'COMPLETED'],
-      defaultValue: 'DENIED'
+      // defaultValue: 'DENIED'
     }
   }, {
   });
