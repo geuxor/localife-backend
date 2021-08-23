@@ -18,14 +18,16 @@ const addFakeBookings = async (req, res) => {
       'min': 200,
       'max': 1000
     });
-    const randomUser = faker.datatype.number({
-      'min': 1,
-      'max': 4
-    });
-    const randomExperience = faker.datatype.number({
-      'min': 1,
-      'max': 4
-    });
+    const randomUser = 4
+    // faker.datatype.number({
+    //   'min': 1,
+    //   'max': 4
+    // });
+    const randomExperience = 53
+    // faker.datatype.number({
+    //   'min': 1,
+    //   'max': 4
+    // });
 
     let newBooking = {
       start_date: randomDateFrom,
