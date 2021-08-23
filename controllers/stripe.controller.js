@@ -78,7 +78,7 @@ async function createSessionId(req, res) {
   const experience = req.body
   const fee = (experience.price * process.env.STRIPE_PLATFORM_FEE)
   console.log(fee);
-  
+
   // createa a session
   try {
     //find user.account_id for the experience.id
@@ -158,9 +158,9 @@ const getAccountStatus = async (req, res) => {
     return res.status(200).send('No Stripe account found');
   }
   try {
-    const account = await updateDelayDaysAPI(user.stripe_account_id);
+    // const account = await updateDelayDaysAPI(user.stripe_account_id);
     // console.log("USER ACCOUNT UPDATED with 7 days payout >>>>>>>>>>>>>>>>>>>>>>", updatedAccount);
-    // const account = await stripe.accounts.retrieve(user.stripe_account_id);
+    const account = await stripe.accounts.retrieve(user.stripe_account_id);
     console.log('getAccountStatus: USER ACCOUNT Updated and RETRIEVED>>>>>', account);
     // update payout days
     // const userUpdateResult = await db.User.update(
@@ -170,16 +170,17 @@ const getAccountStatus = async (req, res) => {
     //   })
     // console.log(account.charges_enabled);
     // const { charges_enabled, details_submitted, payouts_enabled, default_currency, country, capabilities_card_payments, capabilities_platform_payments } = account
+
     const stripeDBdata = {
       charges_enabled: account.charges_enabled,
       details_submitted: account.details_submitted,
       payouts_enabled: account.payouts_enabled,
       default_currency: account.default_currency,
       country: account.country,
-      payout_schedule: account.payout_schedule.delay_days,
+      payout_schedule: account.settings.payouts.schedule.delay_days, //account.payout_schedule.delay_days,
       capabilities_card_payments: account.capabilities.card_payments,
       capabilities_platform_payments: account.capabilities.platform_payments,
-      fields_needed: account.verification.fields_needed,
+      fields_needed: account.requirements.currently_due //account.verification.fields_needed,
     }
     console.log('--stripeDBdata--', stripeDBdata)
 
@@ -189,12 +190,20 @@ const getAccountStatus = async (req, res) => {
         returning: true,
         plain: true
       })
+
+    console.log(account.requirements.currently_due)
+    if (account.requirements.currently_due.length > 0 || account.charges_enabled === false) {
+      throw new Error(account.requirements.currently_due)
+    }
+
     console.log('updatedStripeData', updatedStripeData[1].dataValues);
     res.status(200).send(updatedStripeData[1])
     // res.send(Buffer.from(updatedStripeData))
   } catch (err) {
     console.log(err)
-    res.status(500).send(err);
+    console.log('xxx', err.message);
+
+    res.status(500).send(err.message);
   }
 };
 

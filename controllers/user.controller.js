@@ -26,10 +26,10 @@ const getUserProfile = async (req, res) => {
   console.log('getuserProfile:');
   try {
     const user = req.user
-    const { email, firstname, lastname, avatar, createdAt } = user
+    const { email, firstname, lastname, avatar, createdAt, stripe_registration_complete } = user
     if (!user) throw new Error('mw says invalid user')
     console.log('ReLogged in successfully as user.id:', req.session.isAuth);
-    res.status(200).send({ email, firstname, lastname, avatar, createdAt });
+    res.status(200).send({ email, firstname, lastname, avatar, createdAt, stripe_registration_complete });
   } catch (err) {
     console.log('getuserProfile:', err);
     res.status(404).send({ message: err.message })
