@@ -34,6 +34,7 @@ const getUserProfile = async (req, res) => {
     console.log('getuserProfile:', err);
     res.status(404).send({ message: err.message })
   }
+<<<<<<< HEAD
 };
 
 const addMockUser = async (req, res) => {
@@ -57,6 +58,14 @@ const addMockUser = async (req, res) => {
 
 const addUser = async (req, res) => {
   logme()
+=======
+
+};
+
+const addUser = async (req, res) => {
+  logme()
+  console.log('addUser', req.body)
+>>>>>>> feat: route for cloudinary + config
   const { email } = req.body;
   try {
     const user = await db.User.findOne({ where: { email: email } });
@@ -64,10 +73,17 @@ const addUser = async (req, res) => {
       res.status(201).send('User already exists')
     } else {
       const validatedUserRes = await validateNewUser(req.body)
+<<<<<<< HEAD
       // console.log('Validation response:', validatedUserRes.password);
       if (validatedUserRes.email === req.body.email) {
         const newuser = await db.User.create(validatedUserRes);
         console.log('addUser: newUser Created:', newuser)
+=======
+      console.log('Validation response:', validatedUserRes);
+      if (validatedUserRes.email === req.body.email) {
+        const newuser = await db.User.create(validatedUserRes);
+        console.log('addUser: newUser Created:', newuser.toJSON())
+>>>>>>> feat: route for cloudinary + config
         req.session.isAuth = newuser.id
         res.status(201).send('ok');
       } else {
@@ -106,7 +122,11 @@ const loginUser = async (req, res) => {
     console.log(err);
     res
       .status(401)
+<<<<<<< HEAD
       .send({ error: '401', message: err });
+=======
+      .send({ error: '401', message: err});
+>>>>>>> feat: route for cloudinary + config
   }
 };
 
@@ -120,7 +140,11 @@ const logoutUser = (req, res) => {
           .status(500)
           .send({ error, message: '🐛 Could not log out, please try again' });
       }
+<<<<<<< HEAD
       res.clearCookie('sid').send({ cookie: 'destroyed' });
+=======
+      res.clearCookie('sid').send({cookie: 'destroyed'});
+>>>>>>> feat: route for cloudinary + config
       console.log('sid destroyed!!');
     });
   } catch (err) {
@@ -129,4 +153,8 @@ const logoutUser = (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 module.exports = { getUsers, addUser, loginUser, logoutUser, getUserProfile, addMockUser };
+=======
+module.exports = { getUsers, addUser, loginUser, logoutUser, getUserProfile };
+>>>>>>> feat: route for cloudinary + config

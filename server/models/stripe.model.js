@@ -46,9 +46,12 @@ function StripeDataModel(seq, types) {
     balance_pending_curr: {
       type: types.STRING
     },
+<<<<<<< HEAD
     lifetime_volume: {
       type: types.INTEGER
     },
+=======
+>>>>>>> feat: route for cloudinary + config
     fields_needed: {
       type: types.ARRAY(types.STRING)
     },

@@ -5,7 +5,11 @@ const db = require('../models/index')
 const addFakeUser = async (req, res) => {
   const amount = req.params.amount
   let users = []
+<<<<<<< HEAD
   let alphabet = 'abcdefghijklmnopqrstuvwxyz'
+=======
+  let alphabet = "abcdefghijklmnopqrstuvwxyz"
+>>>>>>> feat: route for cloudinary + config
   for (let i = 0; i < amount; i++) {
     console.log('creating fake users #', i,' into DB ====================>' );
     let randomletter = Math.floor(Math.random() * alphabet.length)
@@ -18,7 +22,11 @@ const addFakeUser = async (req, res) => {
     const randomPassword = '1234'
     const randomPhone = faker.phone.phoneNumber()
     const randomCountry = faker.address.country()
+<<<<<<< HEAD
     const randomAvatar = faker.internet.avatar()    
+=======
+    const randomAvatar = faker.internet.avatar()
+>>>>>>> feat: route for cloudinary + config
 
     const validatedUserRes = await validateNewUser({ email: randomEmail, password: randomPassword, firstname: randomFirstname, lastname: randomLastname })
     validatedUserRes.phone_number = randomPhone

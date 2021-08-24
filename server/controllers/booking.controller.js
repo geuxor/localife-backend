@@ -1,4 +1,5 @@
 const db = require('../models/index')
+<<<<<<< HEAD
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const allBookings = async (req, res) => {
@@ -164,6 +165,8 @@ const addBookingData = async (data) => {
   }
 }
 
+=======
+>>>>>>> feat: route for cloudinary + config
 
 const addBooking = async (req, res) => {
   console.log('addBooking: ', req.body)
@@ -179,6 +182,7 @@ const addBooking = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 const getOneBooking = async (req, res) => {
   console.log('getOneBooking:', req.params);
   console.log('getOneBooking:', req.user);
@@ -210,10 +214,13 @@ const getOneBooking = async (req, res) => {
 
 
 
+=======
+>>>>>>> feat: route for cloudinary + config
 const mineBookings = async (req, res) => {
   const user = req.user
   console.log('mineBookings: => ', user);
   try {
+<<<<<<< HEAD
     const bookings = await db.Booking.findAll({
       where: { UserId: user.id },
       attributes: ['id', 'status', 'start_date', 'end_date', 'price', 'quantity', 'total', 'createdAt'],
@@ -228,6 +235,13 @@ const mineBookings = async (req, res) => {
     });
     console.log('I found ', bookings.length, ' bookings belonging to the signed in user');
     if (!bookings.length) throw new Error('No Bookings found for user')
+=======
+    const bookings = await db.Booking.findAll({ where: { UserId: user.id },
+      include: {
+        model: db.Experience,
+        attributes: ['title', 'description', 'price', 'image', 'city', 'country']
+      } });
+>>>>>>> feat: route for cloudinary + config
     res.status(201).json(bookings);
   } catch (err) {
     console.log('mineBookings: err => ', err);
@@ -238,4 +252,8 @@ const mineBookings = async (req, res) => {
 }
 
 
+<<<<<<< HEAD
 module.exports = { addBooking, mineBookings, getOneBooking, addBookingData, createBooking, allBookings, bookingSuccess }
+=======
+module.exports = { addBooking, mineBookings }
+>>>>>>> feat: route for cloudinary + config

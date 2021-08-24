@@ -3,12 +3,15 @@ console.log('model:                        😅 entering Booking.model');
 function BookingModel(seq, types) {
 
   const Booking = seq.define('Booking', {
+<<<<<<< HEAD
     status: {
       type: types.STRING,
     },
     providerId: {
       type: types.STRING,
     },
+=======
+>>>>>>> feat: route for cloudinary + config
     start_date: {
       type: types.DATE,
     },
@@ -24,9 +27,12 @@ function BookingModel(seq, types) {
     total: {
       type: types.INTEGER,
     },
+<<<<<<< HEAD
     sessionId: {
       type: types.STRING,
     },
+=======
+>>>>>>> feat: route for cloudinary + config
   },
     {});
   Booking.associate = function (models) {
@@ -39,4 +45,8 @@ function BookingModel(seq, types) {
   return Booking
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> feat: route for cloudinary + config
 module.exports = BookingModel

@@ -1,7 +1,10 @@
 const db = require('../models/index')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const queryString = require('query-string')
+<<<<<<< HEAD
 const bookingController = require('./booking.controller')
+=======
+>>>>>>> feat: route for cloudinary + config
 
 const logme = () => {
   console.log('********************* StripeController ****************');
@@ -72,6 +75,73 @@ const createConnectAccount = async (req, res) => {
   }
 }
 
+<<<<<<< HEAD
+=======
+async function createSessionId(req, res) {
+  logme()
+  console.log('createSessionId - buying experienceId: ', req.body.id);
+  const user = req.user
+  const experience = req.body
+  const fee = (experience.price * process.env.STRIPE_PLATFORM_FEE)
+  console.log(fee);
+
+  // createa a session
+  try {
+    //find user.account_id for the experience.id
+    const provider = await db.User.findOne({
+      where: {
+        id: experience.UserId
+      }
+    })
+    console.log('found a user for this experience:', provider.stripe_account_id);
+    if (!provider.stripe_account_id) throw Error('ERR:Experience is not bookable as Stripe_account not found for provider')
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      //purchasing items details, it will be shown to user on checkout - missing picture!!!
+      line_items: [{
+        price_data: {
+          product_data: {
+            name: experience.title
+          },
+          unit_amount: experience.price * 100,
+          currency: 'eur'
+        },
+        quantity: 1
+      }],
+      mode: 'payment',
+      //create payment intent with app fee and destinaiton charge
+      payment_intent_data: {
+        application_fee_amount: fee,
+        //which provider will receive the money?
+        transfer_data: {
+          destination: provider.stripe_account_id
+        },
+      },
+      success_url: `${process.env.STRIPE_SUCCESS_URL}/${experience.id}`,
+      cancel_url: process.env.STRIPE_FAILURE_URL
+    });
+
+    // add session objecto to user in the db - we need it later
+    const updatedStripeSessionId = await db.User.update({ stripe_session_id: session.id },
+      {
+        where: { id: user.id },
+        plain: true
+      })
+    console.log('User with id: ', user.id, ' updated stripe_session_id: ', updatedStripeSessionId)
+    // send session id to client to finalize payment
+    res.status(200).json({ sessionId: session.id, experience: experience })
+  } catch (err) {
+    // let error = {}
+    // err.raw && err.raw.message ? error = err.raw.message : error = err
+    console.log(err.message);
+    res
+      .status(400)
+      .send(err.message);
+  }
+
+}
+
+>>>>>>> feat: route for cloudinary + config
 const updateDelayDaysAPI = async (accountId) => {
   logme()
   const account = await stripe.accounts.update(accountId, {
@@ -127,6 +197,7 @@ const getAccountStatus = async (req, res) => {
         returning: true,
         plain: true
       })
+<<<<<<< HEAD
     console.log('updatedStripeData', updatedStripeData[1].dataValues);
 
     console.log('----', account.requirements.currently_due, '-----')
@@ -149,11 +220,26 @@ const getAccountStatus = async (req, res) => {
       res.status(200).send('Still missing important Stripe info - but I dont know where')
     }
 
+=======
+
+    console.log(account.requirements.currently_due)
+    if (account.requirements.currently_due.length > 0 || account.charges_enabled === false) {
+      throw new Error(account.requirements.currently_due)
+    }
+
+    console.log('updatedStripeData', updatedStripeData[1].dataValues);
+    res.status(200).send(updatedStripeData[1])
+>>>>>>> feat: route for cloudinary + config
     // res.send(Buffer.from(updatedStripeData))
   } catch (err) {
     console.log(err)
     console.log('xxx', err.message);
+<<<<<<< HEAD
     res.status(500).json(err.message);
+=======
+
+    res.status(500).send(err.message);
+>>>>>>> feat: route for cloudinary + config
   }
 };
 
@@ -233,6 +319,7 @@ const testAccountBalance = async (req, res) => {
   }
 }
 
+<<<<<<< HEAD
 
 //no longer used
 async function createSessionId(req, res) {
@@ -316,11 +403,14 @@ async function createSessionId(req, res) {
 
 
 //no longer used
+=======
+>>>>>>> feat: route for cloudinary + config
 const stripeSuccess = async (req, res) => {
   logme()
   console.log('stripeSuccess req', req.body);
 
   const user = req.user
+<<<<<<< HEAD
   console.log('userId:', user.dataValues.id, '\n with session:', user.stripe_session_id, ' \n provider registration complete:', user.stripe_registration_complete);
   try {
     // if (!user.stripe_session_id) throw new Error('No session found')
@@ -370,15 +460,38 @@ const stripeSuccess = async (req, res) => {
         })
 
       console.log('updateProvider', updateProvider);
+=======
+  console.log('userId:', user.dataValues.id, '\n with session:', user.stripe_session_id, ' \n registration complete:', user.stripe_registration_complete);
+  try {
+    if (!user.stripe_session_id) throw new Error('No session found')
+    // 1 get xp id from req.body
+    // const { experienceId } = req.body;
+    // 2 find currently logged in user
+    // check if user has stripeSession
+    // if (!user.stripeSession) return;
+    // 3 retrieve stripe session, based on session id we previously save in user db
+    const session = await stripe.checkout.sessions.retrieve(
+      user.stripe_session_id
+    );
+    console.log('ID:', session.id, '\n -- res from stripe:', session.payment_status, '\n url', session.url);
+    // if paid, create order
+    if (session.payment_status === 'paid') {
+>>>>>>> feat: route for cloudinary + config
       // remove user's stripeSession
       const updatedStripeSessionId = await db.User.update({ stripe_session_id: '' },
         {
           where: { id: user.id },
+<<<<<<< HEAD
           returning: true,
           plain: true
         })
       console.log('Session id deleted from user data: ', updatedStripeSessionId);
 
+=======
+          plain: true
+        })
+      console.log('updatedStripeSessionId.....', updatedStripeSessionId);
+>>>>>>> feat: route for cloudinary + config
       res.json({ success: true });
     } else {
       console.log('stripe payment check failre - status is still unpaid');
@@ -392,3 +505,37 @@ const stripeSuccess = async (req, res) => {
 };
 
 module.exports = { createConnectAccount, createSessionId, getAccountStatus, getAccountBalance, getPayoutSetting, testAccountBalance, stripeSuccess }
+<<<<<<< HEAD
+=======
+
+// res Obj from stripe sessionId looks like this
+//   id: 'cs_test_a1aUqO2yl3RqF7IO43pjhiTOGiMvvsluIOHQJUUN1SxU92lClX2Be4n6gL',
+//   object: 'checkout.session',
+//   allow_promotion_codes: null,
+//   amount_subtotal: 12300,
+//   amount_total: 12300,
+//   automatic_tax: { enabled: false, status: null },
+//   billing_address_collection: null,
+//   cancel_url: 'http://localhost:3000/stripe/failure',
+//   client_reference_id: null,
+//   currency: 'dkk',
+//   customer: null,
+//   customer_details: null,
+//   customer_email: null,
+//   livemode: false,
+//   locale: null,
+//   metadata: {},
+//   mode: 'payment',
+//   payment_intent: 'pi_3JKRWRAR2XieTSCl3F5CKfkB',
+//   payment_method_options: {},
+//   payment_method_types: [ 'card' ],
+//   payment_status: 'unpaid',
+//   setup_intent: null,
+//   shipping: null,
+//   shipping_address_collection: null,
+//   submit_type: null,
+//   subscription: null,
+//   success_url: 'http://localhost:3000/stripe/success',
+//   total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+//   url: 'https://checkout.stripe.com/pay/cs_test_a1aUqO2yl3RqF7IO43pjhiTOGiMvvsluIOHQJUUN1SxU92lClX2Be4n6gL#fidkdWxOYHwnPyd1blpxYHZxWmxuYVZWRG5tc3RLRDBDRlZVQVJgYDNQMicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'
+>>>>>>> feat: route for cloudinary + config

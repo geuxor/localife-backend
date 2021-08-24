@@ -62,9 +62,14 @@ const addFakeExperience = async (req, res) => {
     const randomWords = faker.lorem.words()
     const randomCity = locCity //faker.address.cityName();
     const randomCountry = locCountry //faker.address.cityName();
+<<<<<<< HEAD
     const randomImage = faker.image.image()
     const randomSubtitle = faker.commerce.productDescription()
     const randomDescription = faker.lorem.paragraphs()
+=======
+    const randomImage = faker.image.imageUrl();
+    const randomDescription = faker.commerce.productDescription()
+>>>>>>> feat: route for cloudinary + config
     const randomPrice = faker.commerce.price().slice(0, -3)
     const randomLon = getCoordinates(locCity)[0]
     const randomLat = getCoordinates(locCity)[1]
@@ -80,7 +85,10 @@ const addFakeExperience = async (req, res) => {
 
     let newxp = {
       title: randomTitle + ' ' + randomWords,
+<<<<<<< HEAD
       subtitle: randomSubtitle,
+=======
+>>>>>>> feat: route for cloudinary + config
       description: randomDescription,
       location: randomCity,
       city: randomCity,
@@ -142,7 +150,11 @@ const updateStripe = async (req, res) => {
         country: 'Yemen',
         avatar: 'https://cdn.fakercloud.com/avatars/uxpiper_128.jpg',
         stripe_session_id: null,
+<<<<<<< HEAD
         stripe_registration_complete: 'COMPLETE'
+=======
+        stripe_registration_complete: true,
+>>>>>>> feat: route for cloudinary + config
         // stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
       })
       console.log('dbCreate', dbCreate.id);
@@ -151,10 +163,14 @@ const updateStripe = async (req, res) => {
       const stripeUpdateResult = await db.StripeData.create(
         {
           stripe_account_id: 'acct_1JQtneRf7VatYAmJ',
+<<<<<<< HEAD
           stripe_user_id: dbCreate.id,
           charges_enabled: true,
           balance_pending_amount: 35200,
           lifetime_volume: 23990200
+=======
+          stripe_user_id: dbCreate.id
+>>>>>>> feat: route for cloudinary + config
         })
       await stripeUpdateResult.setUser(dbCreate.id)
         
@@ -169,6 +185,7 @@ const updateStripe = async (req, res) => {
         where: { location: 'Copenhagen' },
         plain: true
       })
+<<<<<<< HEAD
     const updateXpsBcn = await db.Experience.update({ UserId: userid },
       {
         where: { location: 'Barcelona' },
@@ -181,6 +198,10 @@ const updateStripe = async (req, res) => {
       })
     console.log('experience updated :', updateXps);
     console.log('ALL OK: login as: any user and book an xp in CPH/BCN/LON - provider is a@a.aaa 1234');
+=======
+    console.log('experience updated :', updateXps);
+    console.log('ALL OK: login as: any user and book an xp in Copenhagen - provider is a@a.aaa 1234');
+>>>>>>> feat: route for cloudinary + config
     res.status(200).send('ALL OK: login as any user and book an xp in Copenhagen - provider is a@a.aaa 1234')
   } catch (err) {
     console.log(err);
