@@ -25,7 +25,15 @@ const searchResults = async (req, res) => {
 const getOneExperiences = async (req, res)=> {
   console.log('getOneExperiences:', req.params);
   try {
-    const experience = await db.Experience.findOne({where: req.params})
+    const experience = await db.Experience.findOne({
+      where: req.body,
+      // returning: true,
+      // plain: true
+      include: {
+      model: db.User,
+      attributes: ['firstname', 'avatar']
+    }
+    });
     console.log('Found one experience: ', experience.dataValues);
     res.status(200).json(experience)
   } catch(err) {
