@@ -1,12 +1,12 @@
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
-require('dotenv').cloudinary.config()
+require('dotenv').config()
 
 cloudinary.config({
   cloud_name: 'geuxor',
   api_key: process.env.REACT_APP_CLOUDINARY_KEY,
-  api_secret: REACT_APP_CLOUDINARY_SECRET,
+  api_secret: 'hec4Trpse3D3PEEvI53QTqDYvho',
 });
 
 const storage = new CloudinaryStorage({
