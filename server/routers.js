@@ -1,5 +1,9 @@
 const router = require('express').Router();
 const authMiddleware = require('./middleware/auth.mw');
+<<<<<<< HEAD
+const fileUploader = require('./configs/cloudinary.config')
+=======
+>>>>>>> development
 
 console.log(`\n💫 ROUTES..............................
 >>AUTH..........
@@ -74,4 +78,18 @@ router.post('/stripe/test', authMiddleware, stripeController.testAccountBalance)
 router.post('/stripe/session', authMiddleware, stripeController.createSessionId)
 router.post('/stripe/success', authMiddleware, stripeController.stripeSuccess)
 
+<<<<<<< HEAD
+//cloudinary routes
+router.post('/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
+ 
+  if (!req.file) {
+    next(new Error('No file has been uploaded!'))
+    return
+  }  
+  
+  res.json({ secure_url: req.file.path })
+})
+
+=======
+>>>>>>> development
 module.exports = router;
