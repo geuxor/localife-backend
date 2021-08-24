@@ -75,5 +75,18 @@ router.post('/stripe/account-status', authMiddleware, stripeController.getAccoun
 router.post('/stripe/account-balance', authMiddleware, stripeController.getAccountBalance)
 router.post('/stripe/payout-setting', authMiddleware, stripeController.getPayoutSetting)
 router.post('/stripe/test', authMiddleware, stripeController.testAccountBalance)
+router.post('/stripe/session', authMiddleware, stripeController.createSessionId)
+router.post('/stripe/success', authMiddleware, stripeController.stripeSuccess)
+
+//cloudinary routes
+router.post('/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
+ 
+  if (!req.file) {
+    next(new Error('No file has been uploaded!'))
+    return
+  }  
+  
+  res.json({ secure_url: req.file.path })
+})
 
 module.exports = router;
