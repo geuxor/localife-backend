@@ -8,10 +8,13 @@ const addFakeBookings = async (req, res) => {
   let bookings = []
   for (let i = 0; i < amount; i++) {
     const randomPrice = faker.commerce.price().slice(0, -3)
-    const randomDateFrom = faker.date.future()
-    // var today = moment();
-    var tomorrow = moment(randomDateFrom).add(10, 'days');
-    console.log('xxxxxxx', tomorrow.toDate())
+    let randomDateFrom
+    if (i < 9) {
+      randomDateFrom = faker.date.future()
+    } else {
+      randomDateFrom = faker.date.past()
+    }
+    var tomorrow = moment(randomDateFrom).add(3, 'days');
     const randomDateTo = tomorrow.toDate()
     const randomNumber = faker.datatype.number(10);
     const randomTotal = faker.datatype.number({
