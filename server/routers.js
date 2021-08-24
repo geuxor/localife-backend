@@ -1,5 +1,6 @@
-const router = require('express').Router()
-const authMiddleware = require('./middleware/auth.mw')
+const router = require('express').Router();
+const authMiddleware = require('./middleware/auth.mw');
+const fileUploader = require('./configs/cloudinary.config')
 
 console.log(`\n💫 ROUTES..............................
 >>SEEDS
