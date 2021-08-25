@@ -46,7 +46,7 @@ async function createBooking(req, res) {
     });
     console.log('session ===========================>', session);
 
-    const newBooking = { sessionId: session.id, experienceId: experience.id, userId: user.id, providerId: experience.UserId, start_date: start_date}
+    const newBooking = { sessionId: session.id, ExperienceId: experience.id, UserId: user.id, providerId: experience.UserId, start_date: start_date }
     console.log('--------------------- newBooking', newBooking);
 
     const newBookingRes = await addBookingData(newBooking)
@@ -74,9 +74,9 @@ const bookingSuccess = async (req, res) => {
   console.log('bookingSuccess req', req.body);
 
   const user = req.user
-  console.log('userId:', user.dataValues.id, '\n with session:', user.stripe_session_id, ' \n provider registration complete:', user.stripe_registration_complete);
+  console.log('userId:', user.dataValues.id, '\n with Stripe session:', user.stripe_session_id, ' \n provider registration complete:', user.stripe_registration_complete);
   try {
-    if (!user.stripe_session_id) throw new Error('Your session is no longer valid!')
+    if (!user.stripe_session_id) throw new Error('Your Session is no longer valid!')
     const session = await stripe.checkout.sessions.retrieve(
       user.stripe_session_id
     );
@@ -136,9 +136,9 @@ const addBookingData = async (data) => {
     return booking;
   } catch (err) {
     console.log('addBooking: err => ', err);
-    return {err: err.message}
-    }
+    return { err: err.message }
   }
+}
 
 
 const addBooking = async (req, res) => {
@@ -155,15 +155,49 @@ const addBooking = async (req, res) => {
   }
 };
 
+const getOneBooking = async (req, res) => {
+  console.log('getOneBooking:', req.params);
+  console.log('getOneBooking:', req.user);
+  console.log('getOneBooking:', req.body);
+
+  try {
+    const experience = await db.Booking.findOne({
+      where: req.params,
+      // returning: true,
+      // plain: true
+      include: [{
+        model: db.User,
+        attributes: ['firstname', 'avatar'],
+      }, {
+        model: db.Experience,
+        attributes: ['title', 'subtitle', 'UserId']
+      }]
+    });
+    console.log('Found your Booking: ', experience.dataValues);
+    res.status(200).json(experience)
+  } catch (err) {
+    console.log('getOneExperiences: err => ', err);
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+}
+
+
+
 const mineBookings = async (req, res) => {
   const user = req.user
   console.log('mineBookings: => ', user);
   try {
-    const bookings = await db.Booking.findAll({ where: { UserId: user.id },
+    const bookings = await db.Booking.findAll({
+      where: { UserId: user.id },
       include: {
         model: db.Experience,
-        attributes: ['title', 'description', 'price', 'image', 'city', 'country']
-      } });
+        attributes: ['title', 'subtitle', 'price', 'image', 'city', 'country']
+      },
+    });
+    console.log('I found ', bookings.length, ' bookings belonging to the signed in user');
+    if (!bookings.length) throw new Error('No Bookings found for user')
     res.status(201).json(bookings);
   } catch (err) {
     console.log('mineBookings: err => ', err);
@@ -174,4 +208,4 @@ const mineBookings = async (req, res) => {
 }
 
 
-module.exports = { addBooking, mineBookings, addBookingData, createBooking, bookingSuccess }
+module.exports = { addBooking, mineBookings, getOneBooking, addBookingData, createBooking, bookingSuccess }

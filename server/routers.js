@@ -63,6 +63,7 @@ router.post('/experiences/addmany', authMiddleware, experienceController.addMany
 const bookingController = require('./controllers/booking.controller')
 router.post('/bookings/mine', authMiddleware, bookingController.mineBookings)
 router.post('/bookings/new', authMiddleware, bookingController.createBooking)
+router.post('/booking/:id', authMiddleware, bookingController.getOneBooking)
 router.post('/bookings/success', authMiddleware, bookingController.bookingSuccess)
 // router.post('/stripe/session', authMiddleware, stripeController.createSessionId)
 

@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
     console.log('MW: isAuth ', isAuth);
     if (!isAuth) throw new Error('not Authenticated');
     const user = await db.User.findOne({ where: { id: isAuth }});    //and where { email: req.body }?
-    console.log('User.id', user.id)
+    console.log('MW: User.id', user.id)
     if (!user) throw new Error();
     req.user = user;
     next();
