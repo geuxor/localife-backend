@@ -48,7 +48,7 @@ app.get('*', (req, res) => {
 
 (async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter : true });
     console.log('server:                       💽 database synced')
     app.listen(process.env.SERVER_PORT, (err) => {
       if (err) {
