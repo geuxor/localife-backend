@@ -23,10 +23,14 @@ const addFakeUser = async (req, res) => {
     const randomPhone = faker.phone.phoneNumber()
     const randomCountry = faker.address.country()
 <<<<<<< HEAD
+<<<<<<< HEAD
     const randomAvatar = faker.internet.avatar()    
 =======
     const randomAvatar = faker.internet.avatar()
 >>>>>>> feat: route for cloudinary + config
+=======
+    const randomAvatar = faker.internet.avatar()
+>>>>>>> bug-seeds users
 
     const validatedUserRes = await validateNewUser({ email: randomEmail, password: randomPassword, firstname: randomFirstname, lastname: randomLastname })
     validatedUserRes.phone_number = randomPhone
