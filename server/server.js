@@ -104,7 +104,7 @@ app.get('*', (req, res) => {
         console.log(`===========================   🛰️ Server listening on port ${port} - ${host}! =======================>>`); // eslint-disable-line no-console
 =======
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter : true });
     console.log('server:                       💽 database synced')
     app.listen(process.env.SERVER_PORT, (err) => {
       if (err) {
