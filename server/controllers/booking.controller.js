@@ -165,13 +165,14 @@ const getOneBooking = async (req, res) => {
       where: req.params,
       // returning: true,
       // plain: true
-      include: [{
-        model: db.User,
-        attributes: ['firstname', 'avatar'],
-      }, {
+      include: {
         model: db.Experience,
-        attributes: ['title', 'subtitle', 'UserId']
-      }]
+        attributes: ['title', 'subtitle'],
+        include: {
+          model: db.User,
+          attributes: ['firstname', 'avatar']
+        }
+      }
     });
     console.log('Found your Booking: ', experience.dataValues);
     res.status(200).json(experience)
