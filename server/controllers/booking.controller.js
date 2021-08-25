@@ -192,7 +192,7 @@ const mineBookings = async (req, res) => {
   try {
     const bookings = await db.Booking.findAll({
       where: { UserId: user.id },
-      attributes: ['id', 'status', 'start_date', 'price', 'quantity', 'total', 'createdAt'],
+      attributes: ['id', 'status', 'start_date', 'end_date', 'price', 'quantity', 'total', 'createdAt'],
       include: {
         model: db.Experience,
         attributes: ['title', 'subtitle', 'price', 'image', 'city', 'country'],
