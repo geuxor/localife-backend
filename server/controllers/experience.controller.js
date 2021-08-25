@@ -116,5 +116,4 @@ const addManyExperiences = async (req, res) => {
   }
 }
 
-
 module.exports = { addExperience, getOneExperiences, allExperiences, mineExperiences, addManyExperiences, searchResults }
