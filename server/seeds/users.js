@@ -18,7 +18,7 @@ const addFakeUser = async (req, res) => {
     const randomPassword = '1234'
     const randomPhone = faker.phone.phoneNumber()
     const randomCountry = faker.address.country()
-    const randomAvatar = faker.internet.avatar()
+    const randomAvatar = faker.image.imageUrl(400, 400, 'people') //faker.internet.avatar()    
 
     const validatedUserRes = await validateNewUser({ email: randomEmail, password: randomPassword, firstname: randomFirstname, lastname: randomLastname })
     validatedUserRes.phone_number = randomPhone
