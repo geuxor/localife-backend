@@ -1,6 +1,7 @@
 const db = require('../models/index')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const queryString = require('query-string')
+const bookingController = require('./booking.controller')
 
 const logme = () => {
   console.log('********************* StripeController ****************');
@@ -71,70 +72,6 @@ const createConnectAccount = async (req, res) => {
   }
 }
 
-async function createSessionId(req, res) {
-  logme()
-  console.log('createSessionId - buying experienceId: ', req.body.id);
-  const user = req.user
-  const experience = req.body
-  const fee = (experience.price * process.env.STRIPE_PLATFORM_FEE)
-  console.log(fee);
-
-  // createa a session
-  try {
-    //find user.account_id for the experience.id
-    const provider = await db.User.findOne({
-      where: {
-        id: experience.UserId
-      }
-    })
-    console.log('found a user for this experience:', provider.stripe_account_id);
-    if (!provider.stripe_account_id) throw Error('ERR:Experience is not bookable as Stripe_account not found for provider')
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      //purchasing items details, it will be shown to user on checkout - missing picture!!!
-      line_items: [{
-        price_data: {
-          product_data: {
-            name: experience.title
-          },
-          unit_amount: experience.price * 100,
-          currency: 'eur'
-        },
-        quantity: 1
-      }],
-      mode: 'payment',
-      //create payment intent with app fee and destinaiton charge
-      payment_intent_data: {
-        application_fee_amount: fee,
-        //which provider will receive the money?
-        transfer_data: {
-          destination: provider.stripe_account_id
-        },
-      },
-      success_url: `${process.env.STRIPE_SUCCESS_URL}/${experience.id}`,
-      cancel_url: process.env.STRIPE_FAILURE_URL
-    });
-
-    // add session objecto to user in the db - we need it later
-    const updatedStripeSessionId = await db.User.update({ stripe_session_id: session.id },
-      {
-        where: { id: user.id },
-        plain: true
-      })
-    console.log('User with id: ', user.id, ' updated stripe_session_id: ', updatedStripeSessionId)
-    // send session id to client to finalize payment
-    res.status(200).json({ sessionId: session.id, experience: experience })
-  } catch (err) {
-    // let error = {}
-    // err.raw && err.raw.message ? error = err.raw.message : error = err
-    console.log(err.message);
-    res
-      .status(400)
-      .send(err.message);
-  }
-
-}
-
 const updateDelayDaysAPI = async (accountId) => {
   logme()
   const account = await stripe.accounts.update(accountId, {
@@ -190,20 +127,33 @@ const getAccountStatus = async (req, res) => {
         returning: true,
         plain: true
       })
+    console.log('updatedStripeData', updatedStripeData[1].dataValues);
 
-    console.log(account.requirements.currently_due)
+    console.log('----', account.requirements.currently_due, '-----')
     if (account.requirements.currently_due.length > 0 || account.charges_enabled === false) {
       throw new Error(account.requirements.currently_due)
     }
+    if (account.charges_enabled) {
+      const updatedUser = await db.User.update(
+        {
+          stripe_registration_complete: 'COMPLETE'
+        },
+        {
+          where: { id: user.id },
+          returning: true,
+          plain: true
+        })
+      console.log('updatedUser:', updatedUser[1].stripe_registration_complete);
+      res.status(200).send(updatedUser[1].stripe_registration_complete)
+    } else {
+      res.status(200).send('Still missing important Stripe info - but I dont know where')
+    }
 
-    console.log('updatedStripeData', updatedStripeData[1].dataValues);
-    res.status(200).send(updatedStripeData[1])
     // res.send(Buffer.from(updatedStripeData))
   } catch (err) {
     console.log(err)
     console.log('xxx', err.message);
-
-    res.status(500).send(err.message);
+    res.status(500).json(err.message);
   }
 };
 
@@ -283,33 +233,152 @@ const testAccountBalance = async (req, res) => {
   }
 }
 
+
+//no longer used
+async function createSessionId(req, res) {
+  logme()
+  console.log('createSessionId - buying experienceId: ', req.body.id);
+
+  const user = req.user
+  const experience = req.body
+  const fee = (experience.price * process.env.STRIPE_PLATFORM_FEE)
+  console.log(fee);
+
+  // createa a session
+  try {
+    //find user.account_id for the experience.id
+    const provider = await db.User.findOne({
+      where: {
+        id: experience.UserId
+      }
+    })
+    console.log('found a user for this experience:', provider.stripe_account_id);
+    //save xp id to user buying the xp
+    if (!provider.stripe_account_id) throw Error('ERR:Experience is not bookable as Stripe_account not found for provider')
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      //missing picture!!!
+      line_items: [{
+        price_data: {
+          product_data: {
+            name: experience.title
+          },
+          unit_amount: experience.price * 100,
+          currency: 'eur'
+        },
+        quantity: 1
+      }],
+      mode: 'payment',
+      payment_intent_data: {
+        application_fee_amount: fee,
+        transfer_data: {
+          destination: provider.stripe_account_id
+        },
+      },
+      success_url: `${process.env.STRIPE_SUCCESS_URL}/${experience.id}`,
+      cancel_url: process.env.STRIPE_FAILURE_URL
+    });
+    console.log('session ===========================>', session);
+
+    const newBooking = { sessionId: session.id, experienceId: experience.id, userId: user.id, providerId: experience.UserId }
+    console.log('--------------------- newBooking', newBooking);
+
+    const newBookingRes = await bookingController.addBookingData(newBooking)
+    console.log('newBookingRes Response', newBookingRes.dataValues);
+
+    //then in success fetch table to match it with the response
+    //if match then take the acc_id of provider
+    //and save total of purchase to provider lifetime_volume by increasing amount
+    //then retriev  that amount in the provider dashboard instead of asdfx
+
+
+    // add session objecto to user in the db - we need it later 
+    //save here provider.stripe_account_id or UserId or XpId also...!!!!!!!!!!
+    const updatedStripeSessionId = await db.User.update({ stripe_session_id: session.id },
+      {
+        where: { id: user.id },
+        plain: true
+      })
+    //now we have id of xp and id of session !!!!!!!!!!!!!!
+    console.log('User with id: ', user.id, ' updated stripe_session_id: ', updatedStripeSessionId)
+    // send session id to client to finalize payment
+    res.status(200).json({ sessionId: session.id, experience: experience })
+  } catch (err) {
+    // let error = {}
+    // err.raw && err.raw.message ? error = err.raw.message : error = err
+    console.log(err.message);
+    res
+      .status(400)
+      .send(err.message);
+  }
+
+}
+
+
+//no longer used
 const stripeSuccess = async (req, res) => {
   logme()
   console.log('stripeSuccess req', req.body);
 
   const user = req.user
-  console.log('userId:', user.dataValues.id, '\n with session:', user.stripe_session_id, ' \n registration complete:', user.stripe_registration_complete);
+  console.log('userId:', user.dataValues.id, '\n with session:', user.stripe_session_id, ' \n provider registration complete:', user.stripe_registration_complete);
   try {
-    if (!user.stripe_session_id) throw new Error('No session found')
-    // 1 get xp id from req.body
-    // const { experienceId } = req.body;
+    // if (!user.stripe_session_id) throw new Error('No session found')
     // 2 find currently logged in user
     // check if user has stripeSession
     // if (!user.stripeSession) return;
-    // 3 retrieve stripe session, based on session id we previously save in user db
+    if (!user.stripe_session_id) throw new Error('Your session is no longer valid!')
     const session = await stripe.checkout.sessions.retrieve(
       user.stripe_session_id
     );
-    console.log('ID:', session.id, '\n -- res from stripe:', session.payment_status, '\n url', session.url);
+    // 3 retrieve stripe session, based on session id we previously save in payment intent in users db
+    // retrieve also id of xp !!!!!!!!!!!!!!
+    // fetch the Userid for that xp in db
+    //compare sessionid stored in db with session.id from stripe if ok then
+    //check if paid
+    console.log('ID:', session.id, '\n -- res from stripe:', session);
     // if paid, create order
+
     if (session.payment_status === 'paid') {
+      //lookup that sessionid in booking
+      // const bookingData = await db.Booking.findOne({ where: { sessionId: user.stripe_session_id } })
+      // console.log('bookingData', bookingData.dataValues);
+      //change status to paid
+      console.log('sessionId:', user.stripe_session_id);
+
+      const updateBooking = await db.Booking.update(
+        {
+          total: session.amount_total,
+          status: session.payment_status
+        },
+        {
+          where: { sessionId: user.stripe_session_id },
+          returning: true,
+          plain: true
+        })
+
+      console.log('updateBooking ****************', updateBooking[1].dataValues)
+      //before this check if provider is = provider from db??!!!!
+      const updateProvider = await db.StripeData.increment(
+        {
+          lifetime_volume: +session.amount_total
+        },
+        {
+          where: { stripe_user_id: updateBooking[1].providerId },
+          returning: true,
+          plain: true
+        })
+
+      console.log('updateProvider', updateProvider);
       // remove user's stripeSession
       const updatedStripeSessionId = await db.User.update({ stripe_session_id: '' },
         {
           where: { id: user.id },
+          returning: true,
           plain: true
         })
-      console.log('updatedStripeSessionId.....', updatedStripeSessionId);
+      console.log('Session id deleted from user data: ', updatedStripeSessionId);
+
       res.json({ success: true });
     } else {
       console.log('stripe payment check failre - status is still unpaid');
@@ -323,34 +392,3 @@ const stripeSuccess = async (req, res) => {
 };
 
 module.exports = { createConnectAccount, createSessionId, getAccountStatus, getAccountBalance, getPayoutSetting, testAccountBalance, stripeSuccess }
-
-// res Obj from stripe sessionId looks like this
-//   id: 'cs_test_a1aUqO2yl3RqF7IO43pjhiTOGiMvvsluIOHQJUUN1SxU92lClX2Be4n6gL',
-//   object: 'checkout.session',
-//   allow_promotion_codes: null,
-//   amount_subtotal: 12300,
-//   amount_total: 12300,
-//   automatic_tax: { enabled: false, status: null },
-//   billing_address_collection: null,
-//   cancel_url: 'http://localhost:3000/stripe/failure',
-//   client_reference_id: null,
-//   currency: 'dkk',
-//   customer: null,
-//   customer_details: null,
-//   customer_email: null,
-//   livemode: false,
-//   locale: null,
-//   metadata: {},
-//   mode: 'payment',
-//   payment_intent: 'pi_3JKRWRAR2XieTSCl3F5CKfkB',
-//   payment_method_options: {},
-//   payment_method_types: [ 'card' ],
-//   payment_status: 'unpaid',
-//   setup_intent: null,
-//   shipping: null,
-//   shipping_address_collection: null,
-//   submit_type: null,
-//   subscription: null,
-//   success_url: 'http://localhost:3000/stripe/success',
-//   total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
-//   url: 'https://checkout.stripe.com/pay/cs_test_a1aUqO2yl3RqF7IO43pjhiTOGiMvvsluIOHQJUUN1SxU92lClX2Be4n6gL#fidkdWxOYHwnPyd1blpxYHZxWmxuYVZWRG5tc3RLRDBDRlZVQVJgYDNQMicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'
