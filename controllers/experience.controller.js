@@ -51,7 +51,7 @@ const allExperiences = async (req, res) => {
       {
         include: {
           model: db.User,
-          attributes: ['firstname']
+          attributes: ['firstname', 'avatar']
         } //include: [db.User]
       });
     console.log('allExperiences: I found a total of ', experiences.length);
@@ -69,7 +69,9 @@ const mineExperiences = async (req, res) => {
   console.log('allExperiences: MINE Experiences req => ', req.body);
   const user = req.user
   try {
-    const experiences = await db.Experience.findAll({ where: { user_id: user.id } });
+    const experiences = await db.Experience.findAll({ where: { UserId: user.id } });
+    console.log('I found ', experiences.length, ' experiences belonging to the logged in provider');
+    
     res.status(201).json(experiences);
   } catch (err) {
     console.log('allExperiences: MINE experiences err => ', err);
