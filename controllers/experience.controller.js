@@ -51,7 +51,7 @@ const allExperiences = async (req, res) => {
       {
         include: {
           model: db.User,
-          attributes: ['firstname']
+          attributes: ['firstname', 'avatar']
         } //include: [db.User]
       });
     console.log('allExperiences: I found a total of ', experiences.length);

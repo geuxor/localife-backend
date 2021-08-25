@@ -3,6 +3,18 @@ console.log('model:                        😅 entering Booking.model');
 function BookingModel(seq, types) {
 
   const Booking = seq.define('Booking', {
+    status: {
+      type: types.STRING,
+    },
+    userId: {
+      type: types.STRING,
+    },
+    providerId: {
+      type: types.STRING,
+    },
+    experienceId: {
+      type: types.STRING,
+    },
     start_date: {
       type: types.DATE,
     },
@@ -17,6 +29,9 @@ function BookingModel(seq, types) {
     },
     total: {
       type: types.INTEGER,
+    },
+    sessionId: {
+      type: types.STRING,
     },
   },
     {});
