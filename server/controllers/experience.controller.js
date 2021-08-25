@@ -215,5 +215,9 @@ const addManyExperiences = async (req, res) => {
   }
 
 
+<<<<<<< HEAD
 module.exports = { addExperience, addOnlyExperience, getOneExperiences, allExperiences, mineExperiences, addManyExperiences, searchResults }
 >>>>>>> feat: route for cloudinary + config
+=======
+module.exports = { addExperience, getOneExperiences, allExperiences, mineExperiences, addManyExperiences, searchResults }
+>>>>>>> change
