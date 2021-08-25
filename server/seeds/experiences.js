@@ -62,8 +62,9 @@ const addFakeExperience = async (req, res) => {
     const randomWords = faker.lorem.words()
     const randomCity = locCity //faker.address.cityName();
     const randomCountry = locCountry //faker.address.cityName();
-    const randomImage = faker.image.imageUrl();
-    const randomDescription = faker.commerce.productDescription()
+    const randomImage = faker.image.image()
+    const randomSubtitle = faker.commerce.productDescription()
+    const randomDescription = faker.lorem.paragraphs()
     const randomPrice = faker.commerce.price().slice(0, -3)
     const randomLon = getCoordinates(locCity)[0]
     const randomLat = getCoordinates(locCity)[1]
@@ -79,6 +80,7 @@ const addFakeExperience = async (req, res) => {
 
     let newxp = {
       title: randomTitle + ' ' + randomWords,
+      subtitle: randomSubtitle,
       description: randomDescription,
       location: randomCity,
       city: randomCity,
