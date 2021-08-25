@@ -84,20 +84,6 @@ const mineExperiences = async (req, res) => {
   }
 }
 
-//not being used
-const addOnlyExperience = async (req, res) => {
-  console.log('allExperiences: addExperience req: ', req.body);
-  try {
-    const experience = await db.Experience.create(req.body);
-    res.status(201).json(experience);
-  } catch (err) {
-    console.log('allExperiences: addOnlyExperience err => ', err);
-    res.status(400).json({
-      err: err.message,
-    });
-  }
-};
-
 const addExperience = async (req, res) => {
 
   try {
