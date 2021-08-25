@@ -39,5 +39,4 @@ function BookingModel(seq, types) {
   return Booking
 }
 
-
 module.exports = BookingModel
