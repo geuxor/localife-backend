@@ -46,6 +46,9 @@ function StripeDataModel(seq, types) {
     balance_pending_curr: {
       type: types.STRING
     },
+    lifetime_volume: {
+      type: types.INTEGER
+    },
     fields_needed: {
       type: types.ARRAY(types.STRING)
     },
