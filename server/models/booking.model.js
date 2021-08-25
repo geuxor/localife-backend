@@ -6,13 +6,7 @@ function BookingModel(seq, types) {
     status: {
       type: types.STRING,
     },
-    userId: {
-      type: types.STRING,
-    },
     providerId: {
-      type: types.STRING,
-    },
-    experienceId: {
       type: types.STRING,
     },
     start_date: {
