@@ -142,7 +142,7 @@ const updateStripe = async (req, res) => {
         country: 'Yemen',
         avatar: 'https://cdn.fakercloud.com/avatars/uxpiper_128.jpg',
         stripe_session_id: null,
-        stripe_registration_complete: true,
+        stripe_registration_complete: 'COMPLETE'
         // stripe_account_id: 'acct_1JQtneRf7VatYAmJ'
       })
       console.log('dbCreate', dbCreate.id);
@@ -151,7 +151,10 @@ const updateStripe = async (req, res) => {
       const stripeUpdateResult = await db.StripeData.create(
         {
           stripe_account_id: 'acct_1JQtneRf7VatYAmJ',
-          stripe_user_id: dbCreate.id
+          stripe_user_id: dbCreate.id,
+          charges_enabled: true,
+          balance_pending_amount: 35200,
+          lifetime_volume: 23990200
         })
       await stripeUpdateResult.setUser(dbCreate.id)
         
@@ -166,8 +169,18 @@ const updateStripe = async (req, res) => {
         where: { location: 'Copenhagen' },
         plain: true
       })
+    const updateXpsBcn = await db.Experience.update({ UserId: userid },
+      {
+        where: { location: 'Barcelona' },
+        plain: true
+      })
+    const updateXpsLon = await db.Experience.update({ UserId: userid },
+      {
+        where: { location: 'London' },
+        plain: true
+      })
     console.log('experience updated :', updateXps);
-    console.log('ALL OK: login as: any user and book an xp in Copenhagen - provider is a@a.aaa 1234');
+    console.log('ALL OK: login as: any user and book an xp in CPH/BCN/LON - provider is a@a.aaa 1234');
     res.status(200).send('ALL OK: login as any user and book an xp in Copenhagen - provider is a@a.aaa 1234')
   } catch (err) {
     console.log(err);
