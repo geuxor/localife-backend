@@ -116,4 +116,27 @@ const addManyExperiences = async (req, res) => {
   }
 }
 
-module.exports = { addExperience, getOneExperiences, allExperiences, mineExperiences, addManyExperiences, searchResults }
+const deleteExperience = async (req, res) => {
+  console.log('deleteExperience:', req.body);
+  const user = req.user
+  try {
+    const experience = await db.Experience.findOne({
+      where: req.body,
+      // returning: true,
+      // plain: true
+      include: {
+        model: db.User,
+        attributes: ['firstname', 'avatar']
+      }
+    });
+    console.log('Found one experience: ', experience.dataValues);
+    res.status(200).json(experience)
+  } catch (err) {
+    console.log('getOneExperiences: err => ', err);
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+}
+
+module.exports = { addExperience, getOneExperiences, allExperiences, mineExperiences, addManyExperiences, searchResults, deleteExperience }
