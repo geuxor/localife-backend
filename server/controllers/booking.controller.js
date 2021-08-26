@@ -167,7 +167,7 @@ const getOneBooking = async (req, res) => {
       // plain: true
       include: {
         model: db.Experience,
-        attributes: ['title', 'subtitle'],
+        attributes: ['title', 'subtitle', 'description', 'city', 'country'],
         include: {
           model: db.User,
           attributes: ['firstname', 'avatar']
