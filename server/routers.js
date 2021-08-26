@@ -58,6 +58,7 @@ router.get('/experience/:id', experienceController.getOneExperiences)
 router.post('/experiences/mine', authMiddleware, experienceController.mineExperiences)
 router.post('/experiences/new', authMiddleware, experienceController.addExperience)
 router.post('/experiences/addmany', authMiddleware, experienceController.addManyExperiences)
+router.post('/experiences/delete', authMiddleware, experienceController.deleteExperience)
 
 //bookings routes
 const bookingController = require('./controllers/booking.controller')
