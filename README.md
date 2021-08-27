@@ -53,12 +53,12 @@ Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
 
 ### Backend
 
-![https://www.npmjs.com/package/bcrypt](https://img.shields.io/badge/bcrypt--v1--white?style=for-the-badge&logo=npm
-![https://redis.io](https://img.shields.io/badge/redis--v1--white?style=for-the-badge&logo=redis
-![https://expressjs.com](https://img.shields.io/badge/express--v1--white?style=for-the-badge&logo=express
-![https://www.postgresql.org](https://img.shields.io/badge/postgresQL--v1--white?style=for-the-badge&logo=postgresQL
+![https://www.npmjs.com/package/bcrypt](https://img.shields.io/badge/bcrypt--v1--white?style=for-the-badge&logo=npm)
+![https://redis.io](https://img.shields.io/badge/redis--v1--white?style=for-the-badge&logo=redis)
+![https://expressjs.com](https://img.shields.io/badge/express--v1--white?style=for-the-badge&logo=express)
+![https://www.postgresql.org](https://img.shields.io/badge/postgresQL--v1--white?style=for-the-badge&logo=postgresQL)
 ![https://sequelize.org](https://img.shields.io/badge/sequelize--v1--white?style=for-the-badge&logo=sequelize)
-![https://github.com/marak/Faker.js](https://img.shields.io/badge/faker--v1--white?style=for-the-badge&logo=npm
+![https://github.com/marak/Faker.js](https://img.shields.io/badge/faker--v1--white?style=for-the-badge&logo=npm)
 ![https://eslint.org/](https://img.shields.io/badge/eslint--v1--white?style=for-the-badge&logo=eslint)
 ![https://www.stripe.com](https://img.shields.io/badge/stripe%20Connect--v1--white?style=for-the-badge&logo=stripe)
 
