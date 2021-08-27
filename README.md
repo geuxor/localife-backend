@@ -75,6 +75,12 @@ Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
   With the database running, run `npm run recreateDb`. This will generate the tables in the database and seed the data to get the project started.
   Run `nodemon` in localife-backend/server directory
 
+## Architecture
+
+<p align="center">
+ <img src="https://embed.creately.com/KUQYvLkLqTo?token=AcBMz9BDO2IntdH7&type=svg" style="zoom:20%;" >
+</p>
+
 ## Observations
 
 ##### Room for improvements
