@@ -78,7 +78,7 @@ Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
 ## Architecture
 
 <p align="center">
- <img src="./readmeFiles/localife-provider-onboarding" style="zoom:20%;" >
+ <img src="./readmeFiles/localife-provider-onboarding.png" style="zoom:20%;" >
 </p>
 
 ## Observations
