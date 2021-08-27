@@ -4,11 +4,11 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-> Backend client files for the localife app. ([localife backend](https://github.com/geuxor/localife-frontend)  )
+> Backend client files for the localife app. ([localife Frontend](https://github.com/geuxor/localife-frontend)  )
 
 [![GitHub license](https://img.shields.io/github/license/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/blob/develop/LICENSE)[![GitHub release](https://img.shields.io/github/release/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/releases/tag/0.9.0)[![GitHub contributors](https://img.shields.io/github/contributors/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/graphs/contributors)[![GitHub issues](https://img.shields.io/github/issues/geuxor/localife-frontend)](https://GitHub.com/geuxor/localife-frontend/issues)
 
-<span align="center">![ForTheBadge built-with-love](https://ForTheBadge.com/images/badges/built-with-love.svg)</span>
+<span align="center">![ForTheBadge built-with-love](https://forthebadge.com/images/badges/built-with-love.svg)</span>
 
 <p align="center">
  <img src="./readmeFiles/localife.gif" alt="localife logo" style="zoom:50%;" >
