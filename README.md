@@ -51,7 +51,16 @@ Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
 
 ## Tech Stack
 
-💖 [React]()\
+💖 [React](https://img.shields.io/badge/bcrypt--v1--white?style=for-the-badge&logo=npm)\
+
+https://img.shields.io/badge/redis--v1--white?style=for-the-badge&logo=redis
+https://img.shields.io/badge/express--v1--white?style=for-the-badge&logo=express
+https://img.shields.io/badge/postgresQL--v1--white?style=for-the-badge&logo=postgresQL
+https://img.shields.io/badge/sequelize--v1--white?style=for-the-badge&logo=sequelize
+https://img.shields.io/badge/faker--v1--white?style=for-the-badge&logo=npm
+https://img.shields.io/badge/eslint--v1--white?style=for-the-badge&logo=eslint
+https://img.shields.io/badge/stripe%20Connect--v1--white?style=for-the-badge&logo=stripe
+
 💖 [Typescript](https://www.typescriptlang.org/)  
 💖 [Redux](https://redux.js.org/)  
 💖 [Express](https://expressjs.com/)  
