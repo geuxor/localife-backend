@@ -32,7 +32,7 @@ If you don't know where to go next, try the discovery button that will give you 
  <img src="./readmeFiles/screenshot2.png" >
 </p>
 
-## TLDR:
+## Teaser:
 
 Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
 
