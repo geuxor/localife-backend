@@ -107,11 +107,18 @@ Thanks goes to these wonderful people ([💝 ](https://allcontributors.org/docs/
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://www.linkedin.com/in/german-b"><img src="https://avatars2.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>German</b></sub></a><br /><a href="#infra-geuor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=geuxor" title="Code">💻</a></td>
-    <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Seb</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
-    <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Maria</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
-    <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Will</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
-  </tr>
+  <td align="center"><a href="http://www.linkedin.com/in/german-b">
+   <img src="https://avatars.githubusercontent.com/u/16254346?v=4" width="100px;" alt=""/><br /><sub><b>German</b></sub></a><br />
+   <a href="#infra-gexuor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> 
+   <a href="https://github.com/geuxor/localife-frontend/commits?author=geuxor" title="Code">💻</a></td>
+
+   <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Seb</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
+   
+   <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Maria</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
+   
+   <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Will</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
+  
+ </tr>
 </table>
 
 <!-- markdownlint-enable -->
