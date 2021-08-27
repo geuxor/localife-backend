@@ -93,9 +93,9 @@ Checkout a video demo of the app on [YouTube](https://www.youtube.com/watch?v=):
 
 ## Developers Team
 
-😋  German - [Github](https://github.com/geuxor) - [LinkedIn](https://www.linkedin.com/in/german-b)  
-🤠  Seb - [Github](https://github.com/) - [LinkedIn](https://www.linkedin.com/)  
-🥳  Maria - [Github](https://github.com/) - [LinkedIn](https://www.linkedin.com/)
+😋  German - [Github](https://github.com/geuxor) - [LinkedIn](https://www.linkedin.com/in/german-b)\
+🤠  Seb - [Github](https://github.com/) - [LinkedIn](https://www.linkedin.com/)\
+🥳  Maria - [Github](https://github.com/) - [LinkedIn](https://www.linkedin.com/)\
 😂  Will - [Github](https://github.com/) - [LinkedIn](https://www.linkedin.com/)
 
 ## Contributors ✨
@@ -107,7 +107,7 @@ Thanks goes to these wonderful people ([💝 ](https://allcontributors.org/docs/
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://www.linkedin.com/in/german-b"><img src="https://avatars2.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>German B.</b></sub></a><br /><a href="#infra-geuor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=geuxor" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.linkedin.com/in/german-b"><img src="https://avatars2.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>German</b></sub></a><br /><a href="#infra-geuor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=geuxor" title="Code">💻</a></td>
     <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Seb</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
     <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Maria</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
     <td align="center"><a href=""><img src="https://avatars3.githubusercontent.com/u/?v=4" width="100px;" alt=""/><br /><sub><b>Will</b></sub></a><br /><a href="#infra-" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/geuxor/localife-frontend/commits?author=" title="Code">💻</a></td>
