@@ -36,10 +36,8 @@ async function createBooking(req, res) {
   const fee = (experience.price * process.env.STRIPE_PLATFORM_FEE)
   console.log(fee);
 
-  // createa a session
   try {
-    //find user.account_id for the experience.id
-    const provider = await db.User.findOne({
+      const provider = await db.User.findOne({
       where: {
         id: experience.UserId
       }

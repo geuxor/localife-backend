@@ -10,16 +10,16 @@ const seedingDb = async (req, res) => {
 
   try {
     const xStripe = await db.StripeData.destroy(({ truncate: { cascade: true } }))
-    console.log('Stripe Table is now empty:', xStripe);
+    console.log('Stripe Table is now very empty:', xStripe);
 
     const xBkng = await db.Booking.destroy(({ truncate: { cascade: true } }))
-    console.log('Bookings Table is now empty:', xBkng);
+    console.log('Bookings Table is now very empty:', xBkng);
 
     const xXps = await db.Experience.destroy(({ truncate: { cascade: true } }))
-    console.log('Xp Table is now empty:', xXps);
+    console.log('Xp Table is now very empty:', xXps);
 
     const xUsrs = await db.User.destroy(({ truncate: { cascade: true } }))
-    console.log('User Table is now empty:', xUsrs);
+    console.log('User Table is now very empty:', xUsrs);
 
     
     console.log('Creating data...');

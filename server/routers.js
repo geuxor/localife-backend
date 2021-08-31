@@ -28,6 +28,7 @@ get             /destroy-bookings             => empties the Booking DB table
 >>STRIPE.........
 get             /update-stripe                => create provider with stripe acc.
 ..............................\n`)
+
 //faker
 const { seedingDb } = require('./seeds/seeding')
 router.get('/seeding', seedingDb)
