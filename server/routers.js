@@ -28,7 +28,10 @@ get             /destroy-bookings             => empties the Booking DB table
 >>STRIPE.........
 get             /update-stripe                => create provider with stripe acc.
 ..............................\n`)
+
 //faker
+const { seedingDb } = require('./seeds/seeding')
+router.get('/seeding', seedingDb)
 const seedsExperiences = require('./seeds/experiences')
 router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience)
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)
@@ -62,6 +65,7 @@ router.post('/experiences/delete', authMiddleware, experienceController.deleteEx
 
 //bookings routes
 const bookingController = require('./controllers/booking.controller')
+router.get('/bookings', bookingController.allBookings)
 router.post('/bookings/mine', authMiddleware, bookingController.mineBookings)
 router.post('/bookings/new', authMiddleware, bookingController.createBooking)
 router.post('/booking/:id', authMiddleware, bookingController.getOneBooking)
