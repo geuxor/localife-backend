@@ -9,7 +9,7 @@
     "capabilities_card_payments": "active",
     "country": "ES",
     "default_currency": "eur",
-    "balance_pending_amount": 7000,
+    "balance_pending_amount": 6500,
     "balance_pending_curr": "eur",
     "fields_needed": {},
     "lifetime_volume": 584800
