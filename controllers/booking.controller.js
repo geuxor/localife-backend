@@ -1,6 +1,32 @@
 const db = require('../models/index')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const allBookings = async (req, res) => {
+  console.log('allBookings', req.body, req.query, req.params);
+  try {
+    const bookings = await db.Booking.findAll(
+      {
+        // include: {
+        //   model: db.Experience,
+        //   attributes: ['title', 'image', 'subtitle', 'city', 'country'],
+        //   include: {
+        //     model: db.User,
+        //     attributes: ['firstname', 'avatar']
+        //   }
+        // }
+      });
+    console.log('allExperiences: I found a total of ', bookings.length);
+
+    res.status(201).json(bookings);
+  } catch (err) {
+    console.log('allExperiences: err => ', err);
+    res.status(400).json({
+      err: err.message,
+    });
+  }
+}
+
+
 async function createBooking(req, res) {
   console.log('createBooking: - buying experienceId: ', req.body);
 
@@ -214,4 +240,4 @@ const mineBookings = async (req, res) => {
 }
 
 
-module.exports = { addBooking, mineBookings, getOneBooking, addBookingData, createBooking, bookingSuccess }
+module.exports = { addBooking, mineBookings, getOneBooking, addBookingData, createBooking, allBookings, bookingSuccess }
