@@ -1,14 +1,10 @@
 # Localife - your next local adventures
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+**Backend client files for the localife app. ([localife Frontend](https://github.com/geuxor/localife-frontend))**
 
-> Backend client files for the localife app. ([localife Frontend](https://github.com/geuxor/localife-frontend)  )
-
-[![GitHub license](https://img.shields.io/github/license/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/blob/develop/LICENSE)[![GitHub release](https://img.shields.io/github/release/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/releases/tag/0.9.0)[![GitHub contributors](https://img.shields.io/github/contributors/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/graphs/contributors)[![GitHub issues](https://img.shields.io/github/issues/geuxor/localife-frontend)](https://GitHub.com/geuxor/localife-frontend/issues)
-
-<span align="center">![ForTheBadge built-with-love](https://forthebadge.com/images/badges/built-with-love.svg)</span>
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-yellow.svg?style=flat-square)](#contributors-)
+[![GitHub license](https://img.shields.io/github/license/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/blob/develop/LICENSE)[![GitHub release](https://img.shields.io/github/release/geuxor/localife-frontend)](https://github.com/geuxor/localife-frontend/releases/tag/0.9.0)
+[![GitHub issues](https://img.shields.io/github/issues/geuxor/localife-frontend)](https://GitHub.com/geuxor/localife-frontend/issues)
 
 <p align="center">
  <img src="./readmeFiles/logo-small.png" alt="localife logo" width="150px;" >
@@ -122,7 +118,7 @@ Checkout the video demo of the app:
 - Add more badges
 - Create PWA 
 
-## Developers Team
+## Developers Team 💝
 
 😋  German - [Github](https://github.com/geuxor) - [LinkedIn](https://www.linkedin.com/in/german-b)\
 🤠  Seb - [Github](https://github.com/greenseb) - [LinkedIn](https://www.linkedin.com/in/sebastiangreen13/)\
@@ -130,8 +126,9 @@ Checkout the video demo of the app:
 😂  Will - [Github](https://github.com/willwendal) - [LinkedIn](https://www.linkedin.com/in/william-johnson-39998493/)
 
 ## Contributors ✨
-
-Thanks goes to these wonderful people ([💝 ](https://allcontributors.org/docs/en/emoji-key)):
+<span align="center">![ForTheBadge built-with-love](https://forthebadge.com/images/badges/built-with-love.svg)</span>
+<br/>
+Thanks goes to these wonderful people...
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
