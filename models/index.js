@@ -11,8 +11,14 @@ console.log('YOU ARE NOW RUNNING =======> ', process.env.NODE_ENV)
 let sequelize;
 if (process.env.NODE_ENV === 'production') {
   //configuration for heroku
-  sequelize = new Sequelize(process.env.DATABASE_URL)
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true
+    }
+  })
 }
+
 //configuration for localhost
 if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
