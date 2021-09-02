@@ -9,9 +9,8 @@ require('dotenv').config()
 
 let redisClient
 if (process.env.REDISTOGO_URL) {
-  // TODO: redistogo connection
   redisClient = 'redis://redistogo:43da5972d6b2eab02775e2575419adad@soapfish.redistogo.com:11156/'
-  const rtg = require('url').pathname(process.env.REDISTOGO_URL);
+  const rtg = require('url').parse(process.env.REDISTOGO_URL);
   console.log(rtg);
   redisClient = require('redis').createClient(rtg.port, rtg.hostname);
   redisClient.auth(rtg.auth.split(':')[1]);
@@ -19,7 +18,6 @@ if (process.env.REDISTOGO_URL) {
   redisClient = require('redis').createClient()
 }
 let RedisStore = require('connect-redis')(session)
-
 
 const corsConfig = {
   origin: process.env.CLIENT_ORIGIN,
