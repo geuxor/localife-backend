@@ -57,7 +57,7 @@ app.get('*', (req, res) => {
 });
 
 (async () => {
-  const host = process.env.HOST || 'localhost'
+  const host = process.env.HOST
   const port = process.env.PORT || 4001
   try {
     await sequelize.sync({ alter: true });
