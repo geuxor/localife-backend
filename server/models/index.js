@@ -8,6 +8,7 @@ require('dotenv').config()
 console.log('dbconx:                       🌠 connecting to database')
 
 console.log('YOU ARE NOW RUNNING =======> ', process.env.NODE_ENV)
+
 let sequelize;
 if (process.env.NODE_ENV === 'production') {
   //configuration for heroku
@@ -19,7 +20,6 @@ if (process.env.NODE_ENV === 'production') {
     logging: true,
     dialectOptions: {
       ssl: {
-        require: true,
         rejectUnauthorized: false
       }
     }
