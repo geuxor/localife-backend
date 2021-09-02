@@ -9,17 +9,19 @@ const seedingDb = async (req, res) => {
   console.log('seedingDb');
 
   try {
-    const xStripe = await db.StripeData.destroy(({ truncate: { cascade: true } }))
-    console.log('Stripe Table is now very empty:', xStripe);
+    await db.sequelize.sync({ force: true });
 
-    const xBkng = await db.Booking.destroy(({ truncate: { cascade: true } }))
-    console.log('Bookings Table is now very empty:', xBkng);
+    // const xStripe = await db.StripeData.destroy(({ truncate: { cascade: true } }))
+    // console.log('Stripe Table is now very empty:', xStripe);
 
-    const xXps = await db.Experience.destroy(({ truncate: { cascade: true } }))
-    console.log('Xp Table is now very empty:', xXps);
+    // const xBkng = await db.Booking.destroy(({ truncate: { cascade: true } }))
+    // console.log('Bookings Table is now very empty:', xBkng);
 
-    const xUsrs = await db.User.destroy(({ truncate: { cascade: true } }))
-    console.log('User Table is now very empty:', xUsrs);
+    // const xXps = await db.Experience.destroy(({ truncate: { cascade: true } }))
+    // console.log('Xp Table is now very empty:', xXps);
+
+    // const xUsrs = await db.User.destroy(({ truncate: { cascade: true } }))
+    // console.log('User Table is now very empty:', xUsrs);
 
     
     console.log('Creating data...');
