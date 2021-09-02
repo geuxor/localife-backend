@@ -33,13 +33,13 @@ app.use(
     name: 'sid%localife',
     saveUninitialized: false,
     resave: false,
-    secret: process.env.SECRET || '*&^%$£$%TYUJIKL?<HDTYUKO<MKNBFE£$R%T^Y&UJNBFW',
+    // secret: process.env.SECRET || '*&^%$£$%TYUJIKL?<HDTYUKO<MKNBFE£$R%T^Y&UJNBFW',
     cookie: {
       maxAge: 4000000000,
       sameSite: true,
-      httpOnly: false,
+      httpOnly: true,
       // set secure and httponly =true in prod
-      secure: false,
+      secure: true,
     },
   })
 );
@@ -56,10 +56,12 @@ app.get('*', (req, res) => {
 });
 
 (async () => {
+  const host = '0.0.0.0'
+  const port = process.env.PORT || 40001
   try {
     await sequelize.sync({ alter: true });
     console.log('server:                       💽 database synced')
-    app.listen(process.env.SERVER_PORT, (err) => {
+    app.listen(port, host, (err) => {
       if (err) {
         console.log(`server ERR:           👽 Bad errors occuring! ${err}`);
       } else {
