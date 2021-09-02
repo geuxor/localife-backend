@@ -33,7 +33,7 @@ app.use(
     name: 'sid%localife',
     saveUninitialized: false,
     resave: false,
-    // secret: process.env.SECRET || '*&^%$£$%TYUJIKL?<HDTYUKO<MKNBFE£$R%T^Y&UJNBFW',
+    secret: process.env.SECRET || '*&^%$£$%TYUJIKL?<HDTYUKO<MKNBFE£$R%T^Y&UJNBFW',
     cookie: {
       maxAge: 4000000000,
       sameSite: true,
