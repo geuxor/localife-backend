@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node scripts/seeds.js",
-    "dev": "NODE_ENV=development nodemon",
-    "seeding": "NODE_ENV=development node seeds/seeding.js"
+    "dev": "NODE_ENV=development PGHOST=localhost PORT=4001 nodemon",
+    "seeding": "NODE_ENV=development PGHOST=localhost PORT=4001 node seeds/seeding.js"
   },
   "repository": {
     "type": "git",
