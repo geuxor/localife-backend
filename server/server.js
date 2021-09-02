@@ -20,7 +20,7 @@ if (process.env.REDISTOGO_URL) {
 let RedisStore = require('connect-redis')(session)
 
 const corsConfig = {
-  origin: process.env.CLIENT_ORIGIN,
+  // origin: process.env.CLIENT_ORIGIN,
   credentials: true,
 };
 
