@@ -13,6 +13,10 @@ if (process.env.NODE_ENV === 'production') {
   //configuration for heroku
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
+    protocol: 'postgres',
+    port: 5432,
+    host: 'https://git.heroku.com/localife.git',
+    logging: true,
     dialectOptions: {
       ssl: {
         require: true,
