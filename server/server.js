@@ -57,7 +57,7 @@ app.get('*', (req, res) => {
 
 (async () => {
   const host = '0.0.0.0'
-  const port = process.env.PORT || 40001
+  const port = process.env.PORT || 4001
   try {
     await sequelize.sync({ alter: true });
     console.log('server:                       💽 database synced')
@@ -65,7 +65,7 @@ app.get('*', (req, res) => {
       if (err) {
         console.log(`server ERR:           👽 Bad errors occuring! ${err}`);
       } else {
-        console.log(`===========================   🛰️ Server listening on port ${process.env.SERVER_PORT}! =======================>>`); // eslint-disable-line no-console
+        console.log(`===========================   🛰️ Server listening on port ${process.env.PORT}! =======================>>`); // eslint-disable-line no-console
       }
     })
   } catch (err) {
