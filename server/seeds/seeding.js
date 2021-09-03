@@ -21,12 +21,12 @@ const seedingDb = async (req, res) => {
     }
 
     console.log('Users Created');
-    const dbExperiences = await db.Experience.bulkCreate(mockXps)
-    console.log('Experiences Created: ', dbExperiences.length);
-    const dbBookings = await db.Booking.bulkCreate (mockBookings)
-    console.log('Bookings Created: ', dbBookings.length);
-    const dbStripe = await db.StripeData.bulkCreate(mockStripe)
-    console.log('StripeData Created: ', dbStripe.length);
+    // const dbExperiences = await db.Experience.bulkCreate(mockXps)
+    // console.log('Experiences Created: ', dbExperiences.length);
+    // const dbBookings = await db.Booking.bulkCreate (mockBookings)
+    // console.log('Bookings Created: ', dbBookings.length);
+    // const dbStripe = await db.StripeData.bulkCreate(mockStripe)
+    // console.log('StripeData Created: ', dbStripe.length);
     console.log('Seeds Creation finished!');
     res.status(200).send('Seeds Created')
   } catch (err) {
