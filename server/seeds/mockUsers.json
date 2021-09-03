@@ -8,8 +8,7 @@
     "country": "Central African Republic",
     "avatar": "https://cdn.fakercloud.com/avatars/juangomezw_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JSgDARjnew1hMq0"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "b@b.com",
@@ -20,8 +19,7 @@
     "country": "Syrian Arab Republic",
     "avatar": "https://cdn.fakercloud.com/avatars/bereto_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JS2iJDGzkzlxYop"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "c@c.com",
@@ -32,8 +30,7 @@
     "country": "British Indian Ocean Territory",
     "avatar": "https://cdn.fakercloud.com/avatars/patrickcoombe_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JQtneRf7VatYAmJ"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "d@d.com",
@@ -44,8 +41,7 @@
     "country": "Spain",
     "avatar": "https://cdn.fakercloud.com/avatars/erwanhesry_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JSiC1RmPuBajKQQ"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "e@e.com",
@@ -56,8 +52,7 @@
     "country": null,
     "avatar": null,
     "stripe_session_id": null,
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JRuSERXOVIxXOto"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "f@f.com",
@@ -68,8 +63,7 @@
     "country": "Fiji",
     "avatar": "https://cdn.fakercloud.com/avatars/larrygerard_128.jpg",
     "stripe_session_id": "",
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JRIpmRY2oHp9TMb"
+    "stripe_registration_complete": "COMPLETE"
   },
   {
     "email": "g@g.com",
@@ -80,8 +74,7 @@
     "country": "Pakistan",
     "avatar": "https://cdn.fakercloud.com/avatars/chris_frees_128.jpg",
     "stripe_session_id": "",
-    "stripe_registration_complete": "COMPLETE",
-    "stripe_account_id": "acct_1JQ9SRRdtCTwv5fX"
+    "stripe_registration_complete": "COMPLETE"
   },
 
   {
@@ -93,8 +86,7 @@
     "country": "Saint Helena",
     "avatar": "https://cdn.fakercloud.com/avatars/allfordesign_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "DENIED",
-    "stripe_account_id": null
+    "stripe_registration_complete": "DENIED"
   },
   {
     "email": "popo@popo.com",
@@ -105,8 +97,7 @@
     "country": "Congo",
     "avatar": "https://cdn.fakercloud.com/avatars/yecidsm_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "DENIED",
-    "stripe_account_id": null
+    "stripe_registration_complete": "DENIED"
   },
   {
     "email": "pupu@pupu.com",
@@ -117,7 +108,6 @@
     "country": "Montenegro",
     "avatar": "https://cdn.fakercloud.com/avatars/borges_marcos_128.jpg",
     "stripe_session_id": null,
-    "stripe_registration_complete": "DENIED",
-    "stripe_account_id": null
+    "stripe_registration_complete": "DENIED"
   }
 ]
