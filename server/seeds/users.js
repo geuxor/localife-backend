@@ -5,7 +5,7 @@ const db = require('../models/index')
 const addFakeUser = async (req, res) => {
   const amount = req.params.amount
   let users = []
-  let alphabet = "abcdefghijklmnopqrstuvwxyz"
+  let alphabet = 'abcdefghijklmnopqrstuvwxyz'
   for (let i = 0; i < amount; i++) {
     console.log('creating fake users #', i,' into DB ====================>' );
     let randomletter = Math.floor(Math.random() * alphabet.length)
