@@ -20,7 +20,7 @@ if (process.env.REDISTOGO_URL) {
 }
 let RedisStore = require('connect-redis')(session)
 
-const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://localife.netlify.app'
+const origin = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://localife.netlify.app'
 const corsConfig = {
   origin: origin,
   credentials: true,
