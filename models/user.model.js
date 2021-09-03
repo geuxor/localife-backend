@@ -33,11 +33,9 @@ function UserModel(seq, types) {
     stripe_session_id: {
       type: types.STRING
     },
+
     stripe_registration_complete: {
-      type: types.STRING,
-      // type: types.ENUM,
-      // values: ['DENIED', 'PENDING', 'REJECTED', 'COMPLETED'],
-      // defaultValue: 'DENIED'
+      type: types.STRING
     }
   }, {
   });
