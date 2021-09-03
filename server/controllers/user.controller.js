@@ -39,7 +39,6 @@ const getUserProfile = async (req, res) => {
 
 const addUser = async (req, res) => {
   logme()
-  console.log('addUser', req.body)
   const { email } = req.body;
   try {
     const user = await db.User.findOne({ where: { email: email } });
@@ -47,10 +46,10 @@ const addUser = async (req, res) => {
       res.status(201).send('User already exists')
     } else {
       const validatedUserRes = await validateNewUser(req.body)
-      console.log('Validation response:', validatedUserRes);
+      // console.log('Validation response:', validatedUserRes.password);
       if (validatedUserRes.email === req.body.email) {
         const newuser = await db.User.create(validatedUserRes);
-        console.log('addUser: newUser Created:', newuser.toJSON())
+        console.log('addUser: newUser Created:', newuser.id)
         req.session.isAuth = newuser.id
         res.status(201).send('ok');
       } else {

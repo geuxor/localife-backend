@@ -3,37 +3,30 @@ const mockUsers = require('./mockUsers.json')
 const mockXps = require('./mockExperiences.json')
 const mockBookings = require('./mockBookings.json')
 const mockStripe = require('./mockStripe.json')
-
+const fetch = require('node-fetch');
 const seedingDb = async (req, res) => {
-
-  console.log('seedingDb');
 
   try {
     await db.sequelize.sync({ force: true });
 
-    // const xStripe = await db.StripeData.destroy(({ truncate: { cascade: true } }))
-    // console.log('Stripe Table is now very empty:', xStripe);
+    console.log('Creating DATA...')
+    for (let i = 0; i < mockUsers.length; i++) {
+      let user = mockUsers[i]
+      await fetch('http://localhost:4001/register', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      })
+    }
 
-    // const xBkng = await db.Booking.destroy(({ truncate: { cascade: true } }))
-    // console.log('Bookings Table is now very empty:', xBkng);
-
-    // const xXps = await db.Experience.destroy(({ truncate: { cascade: true } }))
-    // console.log('Xp Table is now very empty:', xXps);
-
-    // const xUsrs = await db.User.destroy(({ truncate: { cascade: true } }))
-    // console.log('User Table is now very empty:', xUsrs);
-
-    
-    console.log('Creating data...');
-    const dbUsers = await db.User.bulkCreate(mockUsers)
-    console.log('Users Created: ', dbUsers);
+    console.log('Users Created');
     const dbExperiences = await db.Experience.bulkCreate(mockXps)
-    console.log('Experiences Created: ', dbExperiences);
+    console.log('Experiences Created: ', dbExperiences.length);
     const dbBookings = await db.Booking.bulkCreate (mockBookings)
-    console.log('Bookings Created: ', dbBookings);
-    const dbStripe = await db.Stripe.bulkCreate(mockStripe)
-    console.log('StripeData Created: ', dbStripe);
-
+    console.log('Bookings Created: ', dbBookings.length);
+    const dbStripe = await db.StripeData.bulkCreate(mockStripe)
+    console.log('StripeData Created: ', dbStripe.length);
+    console.log('Seeds Creation finished!');
     res.status(200).send('Seeds Created')
   } catch (err) {
     console.log(err);
