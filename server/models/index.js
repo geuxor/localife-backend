@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
     protocol: 'postgres',
     port: 5432,
     host: 'https://git.heroku.com/localife.git',
-    logging: true,
+    logging: false,
     dialectOptions: {
       ssl: {
         rejectUnauthorized: false
