@@ -11,7 +11,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 6500,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 584800
   },
   {
@@ -26,7 +26,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 787800
   },
   {
@@ -41,7 +41,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 884800
   },
   {
@@ -56,7 +56,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 484800
   },
 
@@ -72,7 +72,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 384800
   },
   {
@@ -87,7 +87,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 284800
   },
   {
@@ -102,7 +102,7 @@
     "default_currency": "eur",
     "balance_pending_amount": 7000,
     "balance_pending_curr": "eur",
-    "fields_needed": [],
+    "fields_needed": {},
     "lifetime_volume": 184800
   }
 ]
