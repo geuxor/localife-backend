@@ -13,11 +13,13 @@ const seedingDb = async (req, res) => {
     for (let i = 0; i < mockUsers.length; i++) {
       let user = mockUsers[i]
 
-      await fetch(endpoint, {
+      let seedRes = await fetch(endpoint, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
       })
+      console.log(seedRes);
+      
     }
 
     console.log('Users Created');
