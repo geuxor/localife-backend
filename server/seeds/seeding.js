@@ -3,6 +3,7 @@ const mockUsers = require('./mockUsers.json')
 const mockXps = require('./mockExperiences.json')
 const mockBookings = require('./mockBookings.json')
 const mockStripe = require('./mockStripe.json')
+const mockStripeAccount = require('./mockStripeAccount.json')
 const fetch = require('node-fetch');
 const seedingDb = async (req, res) => {
 
@@ -19,7 +20,7 @@ const seedingDb = async (req, res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
       })
-      console.log('=========>', seedRes.status);
+      console.log('=========>', seedRes.statusText);
     }
 
     console.log('Users Created', mockUsers.length);
@@ -29,6 +30,15 @@ const seedingDb = async (req, res) => {
     console.log('Bookings Created: ', dbBookings.length);
     const dbStripe = await db.StripeData.bulkCreate(mockStripe)
     console.log('StripeData Created: ', dbStripe.length);
+
+    for (let i = 0; i < 10; i++) {
+      const updatedStripeSessionId = await db.User.update({ stripe_account_id: mockStripeAccount[i] },
+      {
+        where: { id: i+1 },
+        plain: true
+      })
+      console.log(updatedStripeSessionId);
+    }
     console.log('Seeds Creation finished!');
     res.status(200).send('Seeds Created')
   } catch (err) {
