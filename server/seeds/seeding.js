@@ -7,7 +7,8 @@ const fetch = require('node-fetch');
 const seedingDb = async (req, res) => {
 
   try {
-    await db.sequelize.sync({ force: true });
+    const clear = await db.sequelize.sync({ force: true });
+    console.log('Clearing Data...', clear)
     console.log('Creating DATA...')
     const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/register' : 'https://localife.herokuapp.com/register'
     for (let i = 0; i < mockUsers.length; i++) {
@@ -18,11 +19,10 @@ const seedingDb = async (req, res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
       })
-      console.log(seedRes);
-      
+      console.log('=========>', seedRes.status);
     }
 
-    console.log('Users Created');
+    console.log('Users Created', mockUsers.length);
     const dbExperiences = await db.Experience.bulkCreate(mockXps)
     console.log('Experiences Created: ', dbExperiences.length);
     const dbBookings = await db.Booking.bulkCreate (mockBookings)
