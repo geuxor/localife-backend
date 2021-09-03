@@ -4,6 +4,7 @@
   "description": "Localife",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node scripts/seeds.js",
     "dev": "NODE_ENV=development HOST=localhost PORT=4001 nodemon",
