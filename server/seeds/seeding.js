@@ -5,11 +5,12 @@ const mockBookings = require('./mockBookings.json')
 const mockStripe = require('./mockStripe.json')
 const mockStripeAccount = require('./mockStripeAccount.json')
 const fetch = require('node-fetch');
-const seedingDb = async (req, res) => {
+console.log('Entering seeding.js **********');
 
+const seedingDb = async (req, res) => {
   try {
     const clear = await db.sequelize.sync({ force: true });
-    console.log('Clearing Data...', clear)
+    console.log('Clearing Data...')
     console.log('Creating DATA...')
     const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/register' : 'https://localife.herokuapp.com/register'
     for (let i = 0; i < mockUsers.length; i++) {
