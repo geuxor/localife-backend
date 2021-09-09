@@ -4,8 +4,11 @@
   "description": "Localife",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:seed": "node scripts/seeds.js"
+    "seed": "node scripts/seeds.js",
+    "dev": "NODE_ENV=development HOST=localhost PORT=4001 nodemon",
+    "seeding": "NODE_ENV=development PGHOST=localhost PORT=4001 node seeds/seeding.js"
   },
   "repository": {
     "type": "git",
@@ -25,8 +28,10 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "faker": "^5.5.3",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "query-string": "^7.0.1",
@@ -35,7 +40,6 @@
     "stripe": "^8.165.0"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "faker": "^5.5.3"
+    "eslint": "^7.32.0"
   }
 }
