@@ -9,7 +9,7 @@ console.log('Entering seeding.js **********');
 
 const seedingDb = async (req, res) => {
   try {
-    if (process.env.NODE_ENV === 'production') throw new Error('You are not allowed to Seed Production Environment -do: >npm run dev')
+    // if (process.env.NODE_ENV === 'production') throw new Error('You are not allowed to Seed Production Environment -do: >npm run dev')
     const clear = await db.sequelize.sync({ force: true });
     console.log('Clearing Data...')
     console.log('Creating DATA...')
