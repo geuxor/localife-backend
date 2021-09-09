@@ -7,8 +7,11 @@ function ExperienceModel(seq, types) {
       type: types.STRING,
       allowNull: false,
     },
-    description: {
+    subtitle: {
       type: types.STRING,
+    },
+    description: {
+      type: types.TEXT,
       allowNull: false
     },
     location: {
