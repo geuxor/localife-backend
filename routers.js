@@ -31,7 +31,7 @@ get             /update-stripe                => create provider with stripe acc
 
 //faker
 const { seedingDb } = require('./seeds/seeding')
-router.get('/seeding', seedingDb)
+router.get('/seed', seedingDb)
 const seedsExperiences = require('./seeds/experiences')
 router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience)
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)

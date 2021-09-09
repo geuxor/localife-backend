@@ -4,7 +4,7 @@ const session = require('express-session')
 const router = require('./routers')
 const cors = require('cors')
 const { sequelize } = require('./models/index')
-const fakeXps = require('./seeds/fakeXps')
+// const fakeXps = require('./seeds/fakeXps')
 require('dotenv').config()
 
 if (!process.env.REDISTOGO_URL) console.log('REDISTOGO_URL =====> development');
@@ -21,7 +21,7 @@ if (process.env.REDISTOGO_URL) {
 let RedisStore = require('connect-redis')(session)
 
 const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' :
-  (process.env.NODE_ENV === 'seeding' ? 'http://localhost:4000' : 'https://localife.netlify.app')
+  (process.env.NODE_ENV === 'seed' ? 'http://localhost:4001' : 'https://localife.netlify.app')
 
 const corsConfig = {
   origin: origin,
@@ -52,9 +52,9 @@ redisClient.on('server: error', console.error)
 
 app.use(router);
 
-app.get('/xps/:amount', (req, res) => {
-  res.json(fakeXps(req.params));
-});
+// app.get('/xps/:amount', (req, res) => {
+//   res.json(fakeXps(req.params));
+// });
 
 app.get('*', (req, res) => {
   res.status(404).send('server ERR:                   🌵 No Route found');
