@@ -2,6 +2,9 @@ const router = require('express').Router()
 const authMiddleware = require('./middleware/auth.mw')
 
 console.log(`\n💫 ROUTES..............................
+>>SEEDS
+get             /seed           => populate data to DB
+
 >>AUTH..........
 post            /register
 post            /login          => cookie is created
@@ -10,28 +13,20 @@ post            /profile        => relogin user
 
 >>EXPERIENCES....
 get             /search-result?country=Spain  => get result for any query   
-get             /fake/experiences/:amount     => create new fake data in DB
 post            /experiences/new              => create a new experience
 get             /experiences                  => get all experiences
-get             /destroy-experiences          => empties the Experience DB table
-get             /xps                          => get fake data without hitting DB
 
 >>USERS..........
-get             /fake/users/"amount"          => stores fake data in DB
-get             /destroy-users                => empties the User DB table
 get             /users                        => get all users
 
 >>BOOKINGS.......
-get             /fake/bookings/:amount'       => stores fake data in DB
-get             /destroy-bookings             => empties the Booking DB table
+get             /bookings                     => get all bookings
 
->>STRIPE.........
-get             /update-stripe                => create provider with stripe acc.
 ..............................\n`)
 
 //faker
-const { seedingDb } = require('./seeds/seeding')
-router.get('/seeding', seedingDb)
+const { seedingDb } = require('./scripts/seeding')
+router.get('/seed', seedingDb)
 const seedsExperiences = require('./seeds/experiences')
 router.get('/fake/experiences/:amount', seedsExperiences.addFakeExperience)
 router.get('/destroy-experiences', seedsExperiences.destroyAllExperiences)

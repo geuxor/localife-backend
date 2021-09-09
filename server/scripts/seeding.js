@@ -5,11 +5,13 @@ const mockBookings = require('./mockBookings.json')
 const mockStripe = require('./mockStripe.json')
 const mockStripeAccount = require('./mockStripeAccount.json')
 const fetch = require('node-fetch');
-const seedingDb = async (req, res) => {
+console.log('Entering seeding.js **********');
 
+const seedingDb = async (req, res) => {
   try {
+    if (process.env.NODE_ENV === 'production') throw new Error('You are not allowed to Seed Production Environment -do: >npm run dev')
     const clear = await db.sequelize.sync({ force: true });
-    console.log('Clearing Data...', clear)
+    console.log('Clearing Data...')
     console.log('Creating DATA...')
     const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/register' : 'https://localife.herokuapp.com/register'
     for (let i = 0; i < mockUsers.length; i++) {
@@ -43,7 +45,8 @@ const seedingDb = async (req, res) => {
     res.status(200).send('Seeds Created')
   } catch (err) {
     console.log(err);
-    res.status(500).send('Seeds NOT Created')
+    console.log('Seeds NOT Created')    
+    res.status(400).send(err.message)
   }
 }
 
