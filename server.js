@@ -60,7 +60,7 @@ app.get('*', (req, res) => {
   const host = process.env.HOST
   const port = process.env.PORT || 4001
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter : true });
     console.log('server:                       💽 database synced')
     app.listen(port, host, (err) => {
       if (err) {
