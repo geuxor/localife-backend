@@ -42,6 +42,7 @@ router.get('/destroy-bookings', seedsBookings.destroyAllBookings)
 
 //auth routes
 const userController = require('./controllers/user.controller')
+router.post('/mockuser', userController.addMockUser)
 router.post('/register', userController.addUser)
 router.post('/login', userController.loginUser)
 router.get('/logout', userController.logoutUser)

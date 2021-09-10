@@ -13,7 +13,7 @@ const seedingDb = async (req, res) => {
     const clear = await db.sequelize.sync({ force: true });
     console.log('Clearing Data...')
     console.log('Creating DATA...')
-    const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/register' : 'https://localife.herokuapp.com/register'
+    const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/mockuser' : 'https://localife.herokuapp.com/mockuser'
     for (let i = 0; i < mockUsers.length; i++) {
       let user = mockUsers[i]
 
