@@ -26,7 +26,7 @@ const getOneExperiences = async (req, res) => {
   console.log('getOneExperiences:', req.params);
   try {
     const experience = await db.Experience.findOne({
-      where: req.body,
+      where: req.params,
       // returning: true,
       // plain: true
       include: {
