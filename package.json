@@ -31,12 +31,7 @@
     "faker": "^5.5.3",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
-<<<<<<< HEAD
-    "multer": "^1.4.3",
-    "multer-storage-cloudinary": "^4.0.0",
-=======
     "node-fetch": "^2.6.1",
->>>>>>> e8084e631f95662f5865129e5aca975e87113d80
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "query-string": "^7.0.1",
