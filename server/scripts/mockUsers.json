@@ -46,11 +46,11 @@
   {
     "email": "e@e.com",
     "firstname": "Brian ",
-    "lastname": "Donow",
+    "lastname": "Donknow",
     "password": "1234",
-    "phone_number": null,
-    "country": null,
-    "avatar": null,
+    "phone_number": "0000",
+    "country": "Qatar",
+    "avatar": "https://cdn.fakercloud.com/avatars/erwanhesry_128.jpg",
     "stripe_session_id": null,
     "stripe_registration_complete": "COMPLETE"
   },

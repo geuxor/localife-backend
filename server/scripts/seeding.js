@@ -9,11 +9,11 @@ console.log('Entering seeding.js **********');
 
 const seedingDb = async (req, res) => {
   try {
-    if (process.env.NODE_ENV === 'production') throw new Error('You are not allowed to Seed Production Environment -do: >npm run dev')
+    // if (process.env.NODE_ENV === 'production') throw new Error('You are not allowed to Seed Production Environment -do: >npm run dev')
     const clear = await db.sequelize.sync({ force: true });
     console.log('Clearing Data...')
     console.log('Creating DATA...')
-    const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/register' : 'https://localife.herokuapp.com/register'
+    const endpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:4001/mockuser' : 'https://localife.herokuapp.com/mockuser'
     for (let i = 0; i < mockUsers.length; i++) {
       let user = mockUsers[i]
 
