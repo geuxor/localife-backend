@@ -6,7 +6,7 @@ require('dotenv').config()
 cloudinary.config({
   cloud_name: 'geuxor',
   api_key: process.env.REACT_APP_CLOUDINARY_KEY,
-  api_secret: 'hec4Trpse3D3PEEvI53QTqDYvho',
+  api_secret: process.env.REACT_APP_CLOUDINARY_SECRET,
 });
 
 const storage = new CloudinaryStorage({

@@ -34,8 +34,26 @@ const getUserProfile = async (req, res) => {
     console.log('getuserProfile:', err);
     res.status(404).send({ message: err.message })
   }
-
 };
+
+const addMockUser = async (req, res) => {
+  logme()
+  const userData = req.body;
+  try {
+    if (userData) {
+      const validatedUserRes = await validateNewUser(userData)
+      userData.password = validatedUserRes.password
+      const newuser = await db.User.create(userData);
+      console.log('addUser: newUser Created:', newuser)
+      req.session.isAuth = newuser.id
+      res.status(201).send('ok');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+};
+
 
 const addUser = async (req, res) => {
   logme()
@@ -49,7 +67,7 @@ const addUser = async (req, res) => {
       // console.log('Validation response:', validatedUserRes.password);
       if (validatedUserRes.email === req.body.email) {
         const newuser = await db.User.create(validatedUserRes);
-        console.log('addUser: newUser Created:', newuser.id)
+        console.log('addUser: newUser Created:', newuser)
         req.session.isAuth = newuser.id
         res.status(201).send('ok');
       } else {
@@ -88,7 +106,7 @@ const loginUser = async (req, res) => {
     console.log(err);
     res
       .status(401)
-      .send({ error: '401', message: err});
+      .send({ error: '401', message: err });
   }
 };
 
@@ -102,7 +120,7 @@ const logoutUser = (req, res) => {
           .status(500)
           .send({ error, message: '🐛 Could not log out, please try again' });
       }
-      res.clearCookie('sid').send({cookie: 'destroyed'});
+      res.clearCookie('sid').send({ cookie: 'destroyed' });
       console.log('sid destroyed!!');
     });
   } catch (err) {
@@ -111,4 +129,4 @@ const logoutUser = (req, res) => {
   }
 };
 
-module.exports = { getUsers, addUser, loginUser, logoutUser, getUserProfile };
+module.exports = { getUsers, addUser, loginUser, logoutUser, getUserProfile, addMockUser };
