@@ -21,9 +21,9 @@ let RedisStore = require('connect-redis')(session)
 
 const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://localife.netlify.app'
 const secure = process.env.NODE_ENV === 'development' ? false : true
-  // (process.env.NODE_ENV === 'seed' ? 'http://localhost:4001' :
+const httpOnly = process.env.NODE_ENV === 'development' ? false : true
 
-  const corsConfig = {
+const corsConfig = {
   origin: origin,
   credentials: true,
 };
@@ -42,8 +42,7 @@ app.use(
     cookie: {
       maxAge: 4000000000,
       sameSite: true,
-      httpOnly: true,
-      // set secure and httponly =true in prod
+      httpOnly: httpOnly,
       secure: secure,
     },
   })
@@ -60,7 +59,7 @@ app.get('*', (req, res) => {
   const host = process.env.HOST
   const port = process.env.PORT || 4001
   try {
-    await sequelize.sync({ alter : true });
+    await sequelize.sync({ alter: true });
     console.log('server:                       💽 database synced')
     app.listen(port, host, (err) => {
       if (err) {
