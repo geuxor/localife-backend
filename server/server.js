@@ -69,8 +69,11 @@ app.use(
       httpOnly: true,
 =======
       httpOnly: httpOnly,
+<<<<<<< HEAD
 >>>>>>> bug httponly
       // set secure and httponly =true in prod
+=======
+>>>>>>> removed comment
       secure: secure,
 =======
       httpOnly: false,
