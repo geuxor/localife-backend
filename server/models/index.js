@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 //configuration for localhost
 if (process.env.NODE_ENV === 'development') {
   sequelize = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
-    host: process.env.PGHOST,
+    host: process.env.HOST,
     dialect: 'postgres',
     logging: false,
     pool: {
