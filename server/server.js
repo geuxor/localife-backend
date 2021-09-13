@@ -44,7 +44,6 @@ app.use(
       maxAge: 4000000000,
       sameSite: true,
       httpOnly: httpOnly,
-      // set secure and httponly =true in prod
       secure: secure,
     },
   })
