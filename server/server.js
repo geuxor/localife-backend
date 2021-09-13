@@ -22,6 +22,7 @@ let RedisStore = require('connect-redis')(session)
 
 const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://localife.netlify.app'
 const secure = process.env.NODE_ENV === 'development' ? false : true
+const httpOnly = process.env.NODE_ENV === 'development' ? false : true
   // (process.env.NODE_ENV === 'seed' ? 'http://localhost:4001' :
 
   const corsConfig = {
@@ -64,7 +65,11 @@ app.use(
       maxAge: 4000000000,
       sameSite: true,
 <<<<<<< HEAD
+<<<<<<< HEAD
       httpOnly: true,
+=======
+      httpOnly: httpOnly,
+>>>>>>> bug httponly
       // set secure and httponly =true in prod
       secure: secure,
 =======

@@ -65,7 +65,7 @@ app.get('*', (req, res) => {
       if (err) {
         console.log(`server ERR:           👽 Bad errors occuring! ${err}`);
       } else {
-        console.log(`===========================   🛰️ Server listening on port ${port} - ${host}! =======================>>`); // eslint-disable-line no-console
+        console.log(`==========================   🛰️ Server listening on port ${port} - ${host}! =======================>>`); // eslint-disable-line no-console
       }
     })
   } catch (err) {
