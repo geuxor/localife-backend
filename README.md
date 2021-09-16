@@ -22,7 +22,7 @@ It's very easy to register as a provider, and you can start creating experiences
 
 Checkout the video demo of the app:
 
-[![Watch the video](./readmeFiles/back2.png)](https://www.youtube.com/watch?v=8ktIg66ARAk)
+[![Watch the video](./readmeFiles/newscreen.png)](https://www.youtube.com/watch?v=8ktIg66ARAk)
 
 ## Table of contents
 
